@@ -16,9 +16,11 @@ Route::get('/home', "Main\\MainController@index");
 Route::get('/login', 'Main\\MainController@login');
 Route::post('/login-validation', 'Main\\MainController@loginValidation');
 Route::post('/redirect', 'Main\\MainController@redirect');
-
-
-/* all this route to student*/
+Route::get('/logout', function () {
+    session_destroy();
+    return redirect('/');
+});
+/***********************************************************************************************************/
 Route::get('/students/show', 'Student\\StudentController@showAll');
 Route::get('/students/search', 'Student\\StudentController@search');
 Route::get('/student/info-{id}', 'Student\\StudentController@info');
@@ -33,15 +35,6 @@ Route::get('/mail/send','Mail\\MailController@sendMessage');
 Route::post('/student/convert-type', 'Student\\StudentController@convertStudentType');
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
-
-Route::get('/student/print-info','Student\\StudentController@print');
-
-Route::get('/logout', function () {
-    session_destroy();
-    return redirect('/');
-});
-
-
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
 Route::post('/courses/search', 'Course\\CourseController@search');
@@ -69,7 +62,6 @@ Route::post('/lecturers/search', 'Lecturer\\LecturerController@search');
 Route::get('/lecturer/info-{id}', 'Lecturer\\LecturerController@info');
 
 Route::get('/lecturer/create', 'Lecturer\\LecturerController@create');
-/***********************************************************************************************************/
 /***********************************************************************************************************/
 Route::get('/timetable/show', 'TimeTable\\TimeTableController@show');
 Route::post('/timetable/{text}/show', 'TimeTable\\TimeTableController@timeTable');
