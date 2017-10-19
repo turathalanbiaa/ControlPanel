@@ -35,6 +35,8 @@ Route::get('/mail/send','Mail\\MailController@sendMessage');
 Route::post('/student/convert-type', 'Student\\StudentController@convertStudentType');
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
+
+Route::get('/student/paper/show/bbb/bb', 'Student\\StudentController@paper');
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
 Route::post('/courses/search', 'Course\\CourseController@search');

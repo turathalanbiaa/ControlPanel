@@ -11,6 +11,6 @@ namespace App\Model\Student;
 
 class Gender
 {
-    const FEMALE = 0;
-    const MALE = 1;
+    const FEMALE = "female";
+    const MALE = "male";
 }

@@ -416,6 +416,19 @@ class StudentController extends Controller
 
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
+
+    public function paper()
+    {
+        $id = Input::get("id");
+        $student = Student::find($id);
+
+        if (!$student)
+            return redirect("/student/info-$student->ID");
+
+        return view("student.student")->with([
+            "students" => $student
+        ]);
+    }
 }
 
 

@@ -46,11 +46,7 @@
                 </div>
 
                 <div class="column">
-                    <form class="ui form" method="post" action="/student/print-student-info">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="ID" value="{{$student->ID}}">
-                        <button type="submit" class="fluid large ui orange button">طباعة بيانات الطالب</button>
-                    </form>
+                    <a href="/student/paper/show/bbb/bb?id={{$student->ID}}" class="fluid large ui orange button">عرض المستمسكات</a>
                 </div>
             </div>
         </div>
@@ -64,14 +60,6 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-                </div>
-            </div>
-        @endif
-
-        @if(session("UpdateMessage"))
-            <div class="sixteen wide column">
-                <div class="ui success large message">
-                    <h2 style="text-align: center;">{{session("UpdateMessage")}}</h2>
                 </div>
             </div>
         @endif
@@ -157,38 +145,20 @@
                                     <label for="gender">الجنس</label>
                                 </div>
                                 <div class="twelve wide field">
-                                    <?php $genderType = $student->Gender; ?>
-                                    @if($genderType == \App\Model\Student\Gender::MALE)
-                                        <div class="inline fields">
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <label>ذكر</label>
-                                                    <input type="radio" name="gender" value="{{\App\Model\Student\Gender::MALE}}" checked="checked" tabindex="0" class="hidden" id="gender">
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <label>أنثى</label>
-                                                    <input type="radio" name="gender" value="{{\App\Model\Student\Gender::FEMALE}}" tabindex="0" class="hidden" id="gender">
-                                                </div>
+                                    <div class="inline fields">
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <label>ذكر</label>
+                                                <input type="radio" name="gender" value="{{\App\Model\Student\Gender::MALE}}" <?php if($student->Gender == \App\Model\Student\Gender::MALE) echo 'checked="checked"'; ?> tabindex="0" class="hidden" id="gender">
                                             </div>
                                         </div>
-                                    @elseif($genderType == \App\Model\Student\Gender::FEMALE)
-                                        <div class="inline fields">
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <label>ذكر</label>
-                                                    <input type="radio" name="gender" value="{{\App\Model\Student\Gender::MALE}}" tabindex="0" class="hidden" id="gender">
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <label>أنثى</label>
-                                                    <input type="radio" name="gender" value="{{\App\Model\Student\Gender::FEMALE}}" checked="checked" tabindex="0" class="hidden" id="gender">
-                                                </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <label>أنثى</label>
+                                                <input type="radio" name="gender" value="{{\App\Model\Student\Gender::FEMALE}}" <?php if($student->Gender == \App\Model\Student\Gender::FEMALE) echo 'checked="checked"'; ?> tabindex="0" class="hidden" id="gender">
                                             </div>
                                         </div>
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
 

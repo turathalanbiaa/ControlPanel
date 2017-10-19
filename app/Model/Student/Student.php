@@ -22,4 +22,9 @@ class Student extends Model
             ->limit($page_size)
             ->get();
     }
+
+    public function Paper()
+    {
+        return $this->hasMany('App\Model\Student\StudentPaper', 'Student_ID', 'ID');
+    }
 }
