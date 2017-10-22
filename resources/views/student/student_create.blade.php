@@ -1,7 +1,7 @@
 @extends("layout.main_layout")
 
 @section("title")
-    <title>أضافة</title>
+    <title>انشاء حساب جديد</title>
 @endsection
 
 @section("content")
@@ -9,6 +9,14 @@
         <div class="sixteen wide column">
             @include("layout.welcome_to_control_panel")
         </div>
+
+        @if(session("ChooseAccountMessage"))
+            <div class="sixteen wide column">
+                <div class="ui success large message">
+                    <h2 style="text-align: center;">{{session("ChooseAccountMessage")}}</h2>
+                </div>
+            </div>
+        @endif
 
         @if(count($errors))
             <div class="sixteen wide column">

@@ -49,15 +49,23 @@ class StudentController extends Controller
         if (!Authorization::authorize(Map::MAPS["Student"]))
             return view("message.warning_message");
 
-        $query = $_GET["query"];
-        $optionSearch = $_GET['option'];
+        $query = Input::get("query");
+        $optionSearch = Input::get("option");
+
+        if($query == '')
+            return redirect("/students/show");
 
         if($optionSearch == 1)
+        {
+            //Search about student using id.
+            $students = Student::find($query);
+        }
+        if($optionSearch == 2)
         {
             //Search about student using name.
             $students = Student::where('name', 'LIKE', '%'.$query.'%')->get();
         }
-        elseif($optionSearch == 2)
+        elseif($optionSearch == 3)
         {
             //Search about student using email.
             $students = Student::where('email', 'LIKE', '%'.$query.'%')->get();
@@ -70,71 +78,6 @@ class StudentController extends Controller
         return view("student.student")->with([
             'students' => $students
         ]);
-    }
-
-    public function info($id)
-    {
-        if(!Login::isLogin())
-            return redirect("/login");
-
-        if (!Authorization::authorize(Map::MAPS["Student"]))
-            return view("message.warning_message");
-
-        $student = Student::find($id);
-
-        if(!$student)
-            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
-
-        return view("student.student_info")->with('student',$student);
-    }
-
-    public function update(Request $request)
-    {
-        $id = Input::get("ID");
-        $this->validate($request,[
-            'name' => 'required',
-            'email' => ['required', Rule::unique('student')->ignore($id)],
-            'phone' => 'required',
-            'gender' => 'required',
-            'birthdate' => 'required|date',
-            'level' => 'required',
-            'scientific_degree' => 'required',
-            'country' => 'required',
-            'address' => 'required',
-        ], [
-            'name.required' => 'يجب ادخال اسم الطالب الرباعي واللقب.',
-            'email.required' => 'البريد الإلكتروني فارغ.',
-            'email.unique' => 'البريد الإلكتروني موجود مسبقا.',
-            'phone.required' => 'الهاتف فارغ.',
-            'gender.required' => 'يرجى اختيار الجنس.',
-            'birthdate.required' => 'تاريخ الميلاد فارغ.',
-            'level.required' => 'يرجى اختيار المرحلة.',
-            'scientific_degree.required' => 'يرجى اختيار الشهادة.',
-            'country.required' => 'يرجى اختيار البلد.',
-            'address.required' => 'العنوان فارغ.',
-        ]);
-
-        $student = Student::find($id);
-
-        if($student)
-        {
-            $student->Name = Input::get("name");
-            $student->Email = Input::get("email");
-            $student->Phone = Input::get("phone");
-            $student->Gender = Input::get("gender");
-            $student->Birthdate = Input::get("birthdate");
-            $student->Level = Input::get("level");
-            $student->Group = Input::get("group");
-            $student->ScientificDegree = Input::get("scientific_degree");
-            $student->Country = Input::get("country");
-            $student->Address = Input::get("address");
-
-            $student->save();
-
-            return redirect("/student/info-$student->ID")->with('UpdateMessage', 'تم تعديل بيانات الطالب بنجاح.');
-        }
-
-        return redirect("/student/info-$student->ID")->with('UpdateMessage', 'لم يتم تعديل البيانات بنجاح يرجى اعادة العملية من جديد');
     }
 
     public function create($accountType)
@@ -155,7 +98,7 @@ class StudentController extends Controller
         }
         else
         {
-            return redirect('/students/show')->with('ChooseAccount', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
+            return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
         }
     }
 
@@ -264,7 +207,7 @@ class StudentController extends Controller
         if (!$success)
             return redirect("/student/create/$accountType")->with('CreateAccountMessage', 'لم يتم اضافة الطالب أعد المحاولة مرة أخرى.');
 
-        return redirect("/student/create/$accountType")->with('CreateAccountMessage', 'تمت عملية انشاء الحساب بنجاح".');
+        return redirect("/student/create/$accountType")->with('CreateAccountMessage', 'تمت عملية انشاء الحساب بنجاح.');
     }
 
     public function delete()
@@ -272,12 +215,111 @@ class StudentController extends Controller
         $ID = Input::get("studentID");
 
         $student = Student::find($ID);
+
+        if(!$student)
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
+
         $success = $student->delete();
 
         if(!$success)
             return redirect("/students/show")->with('DeleteMessage', "لم يتم حذف الطالب يرجى المحاولة مرة أخرى");
 
         return redirect("/students/show")->with('DeleteMessage', "تم حذف الطالب بنجاح");
+    }
+
+    public function info($id)
+    {
+        if(!Login::isLogin())
+            return redirect("/login");
+
+        if (!Authorization::authorize(Map::MAPS["Student"]))
+            return view("message.warning_message");
+
+        $student = Student::find($id);
+
+        if(!$student)
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
+
+        return view("student.student_info")->with('student',$student);
+    }
+
+    public function update(Request $request)
+    {
+        $id = Input::get("ID");
+        $student = Student::find($id);
+
+        if (!$student)
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
+
+        if ($student->Type == StudentType::LEGAL_STUDENT)
+        {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => ['required', Rule::unique('student')->ignore($id)],
+                'phone' => 'required',
+                'gender' => 'required',
+                'country' => 'required',
+                'birthdate' => 'required|date',
+                'level' => 'required',
+                'group' => 'required',
+                'scientific_degree' => 'required',
+                'address' => 'required',
+            ], [
+                'name.required' => 'يجب ادخال اسم الطالب الرباعي واللقب.',
+                'email.required' => 'البريد الإلكتروني فارغ.',
+                'email.unique' => 'البريد الإلكتروني موجود مسبقا.',
+                'phone.required' => 'الهاتف فارغ.',
+                'gender.required' => 'يرجى اختيار الجنس.',
+                'country.required' => 'يرجى اختيار البلد.',
+                'birthdate.required' => 'تاريخ الميلاد فارغ.',
+                'level.required' => 'يرجى اختيار المرحلة.',
+                'group.required' => 'يجب ادخال الشعبة.',
+                'scientific_degree.required' => 'يرجى اختيار الشهادة.',
+                'address.required' => 'العنوان فارغ.',
+            ]);
+
+            $student->Name = Input::get("name");
+            $student->Email = Input::get("email");
+            $student->Phone = Input::get("phone");
+            $student->Gender = Input::get("gender");
+            $student->Country = Input::get("country");
+            $student->Birthdate = Input::get("birthdate");
+            $student->Level = Input::get("level");
+            $student->Group = Input::get("group");
+            $student->ScientificDegree = Input::get("scientific_degree");
+            $student->Address = Input::get("address");
+        }
+
+        if ($student->Type == StudentType::LISTENER)
+        {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => ['required', Rule::unique('student')->ignore($id)],
+                'phone' => 'required',
+                'gender' => 'required',
+                'country' => 'required'
+            ], [
+                'name.required' => 'يجب ادخال اسم الطالب الرباعي واللقب.',
+                'email.required' => 'البريد الإلكتروني فارغ.',
+                'email.unique' => 'البريد الإلكتروني موجود مسبقا.',
+                'phone.required' => 'الهاتف فارغ.',
+                'gender.required' => 'يرجى اختيار الجنس.',
+                'country.required' => 'يرجى اختيار البلد.'
+            ]);
+
+            $student->Name = Input::get("name");
+            $student->Email = Input::get("email");
+            $student->Phone = Input::get("phone");
+            $student->Gender = Input::get("gender");
+            $student->Country = Input::get("country");
+        }
+
+        $success = $student->save();
+
+        if (!$success)
+            return redirect("/student/info-$student->ID")->with('UpdateMessage', 'لم يتم تعديل البيانات بنجاح يرجى اعادة العملية من جديد');
+
+        return redirect("/student/info-$student->ID")->with('UpdateMessage', 'تم تعديل بيانات الطالب بنجاح.');
     }
 
     public function changePassword($id)
@@ -332,7 +374,7 @@ class StudentController extends Controller
         $student = Student::find($studentId);
 
         if (!$student)
-            return redirect("/student/info-$student->ID");
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
 
         if($student->Type == StudentType::LEGAL_STUDENT)
         {
@@ -368,7 +410,7 @@ class StudentController extends Controller
         $student = Student::find($ID);
 
         if (!$student)
-            return redirect("/student/info-$student->ID");
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
 
         return view("student.listener_to_legalStudent")->with(["student" => $student]);
     }
@@ -379,7 +421,7 @@ class StudentController extends Controller
         $student = Student::find($ID);
 
         if (!$student)
-            return redirect("/student/info-$student->ID");
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
 
         $this->validate($request,[
             'ID' => 'numeric',
@@ -402,6 +444,7 @@ class StudentController extends Controller
             'address.required' => 'حقل العنوان فارغ.'
         ]);
 
+        $student->Type = StudentType::LEGAL_STUDENT;
         $student->Name = Input::get("name");
         $student->Birthdate = Input::get("birthdate");
         $student->Level = Input::get("level");
@@ -417,17 +460,23 @@ class StudentController extends Controller
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
 
+
+
+
+
+
     public function paper()
     {
         $id = Input::get("id");
         $student = Student::find($id);
 
+        abort(404);
+        die();
+
         if (!$student)
             return redirect("/student/info-$student->ID");
 
-        return view("student.student")->with([
-            "students" => $student
-        ]);
+        return view("student.student_paper");
     }
 }
 

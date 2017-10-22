@@ -18,10 +18,12 @@ class MailController extends Controller
         $student = Student::find($studentId);
 
         if (!$student)
-            return redirect("/student/info-$studentId");
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
 
         if ($verifiedEmailType == 1)
         {
+
+
             $success = $this->sendMail($request, $student);
 
             if(!$success)
@@ -52,7 +54,7 @@ class MailController extends Controller
     {
         Mail::send('mail.mail', ['student' => $student], function ($message) use ($student)
         {
-            $message->from('turath.alanbiaa.web@gmail.com', "معهد تراث الأنبياء للدراسات الحوزوية الإلكترونيه");
+            $message->from('info@turath-alanbiaa.org', "معهد تراث الأنبياء(عليه السلام) للدراسات الحوزوية الإلكترونيه");
             $message->to($student->Email, $student->Name)->subject("تفعبل الحساب");
         });
 

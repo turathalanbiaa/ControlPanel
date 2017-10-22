@@ -23,10 +23,13 @@ Route::get('/logout', function () {
 /***********************************************************************************************************/
 Route::get('/students/show', 'Student\\StudentController@showAll');
 Route::get('/students/search', 'Student\\StudentController@search');
-Route::get('/student/info-{id}', 'Student\\StudentController@info');
-Route::post('/student/update', 'Student\\StudentController@update');
 Route::get('/student/create/{accountType}', 'Student\\StudentController@create');
 Route::post('/student/create/validation', 'Student\\StudentController@createValidation');
+
+Route::get('/student/info-{id}', 'Student\\StudentController@info');
+Route::post('/student/update', 'Student\\StudentController@update');
+
+
 Route::post('/student/delete', 'Student\\StudentController@delete');
 Route::get('/student/change-password/{id}', 'Student\\StudentController@changePassword');
 Route::post('/student/change-password/validation', 'Student\\StudentController@changePasswordValidation');
@@ -36,7 +39,16 @@ Route::post('/student/convert-type', 'Student\\StudentController@convertStudentT
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
 
-Route::get('/student/paper/show/bbb/bb', 'Student\\StudentController@paper');
+Route::get('/student/paper', function (){
+    $list = [1,2,3,4,5,6,7,8];
+    $key = $_GET['id'];
+
+    if (in_array($key, $list))
+        return "Found This ID";
+
+        return abort(404,"this error", []);
+
+});
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
 Route::post('/courses/search', 'Course\\CourseController@search');

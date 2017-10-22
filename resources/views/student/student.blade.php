@@ -35,7 +35,7 @@
                 <div class="ten wide column">
                     <form class="ui big form" method="get" action="/students/search" dir="rtl">
                         <div class="ui left icon input" style="width: 100%; text-align: right;">
-                            <input type="text" placeholder="بحث عن طالب" name="query" style="text-align: right;">
+                            <input type="text" placeholder="بحث عن طالب" name="query" value="" style="text-align: right;">
                             <i class="search icon"></i>
                         </div>
 
@@ -45,14 +45,20 @@
                             <label for="option">بحث عن الطالب عن طريق:</label>
                             <div class="field">
                                 <div class="ui radio checkbox">
+                                    <label for="option">ID</label>
+                                    <input type="radio" name="option" value="1" class="hidden">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
                                     <label for="option">الاسم</label>
-                                    <input type="radio" name="option" value="1" checked="checked" class="hidden">
+                                    <input type="radio" name="option" value="2" checked="checked" class="hidden">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="ui radio checkbox">
                                     <label for="option">البريد</label>
-                                    <input type="radio" name="option" value="2"  class="hidden">
+                                    <input type="radio" name="option" value="3"  class="hidden">
                                 </div>
                             </div>
                         </div>
@@ -69,10 +75,10 @@
             </div>
         </div>
 
-        @if(session("ChooseAccountMessage"))
+        @if(session("CreateAccountMessage"))
             <div class="sixteen wide column">
                 <div class="ui success large message">
-                    <h2 style="text-align: center;">{{session("ChooseAccountMessage")}}</h2>
+                    <h2 style="text-align: center;">{{session("CreateAccountMessage")}}</h2>
                 </div>
             </div>
         @endif

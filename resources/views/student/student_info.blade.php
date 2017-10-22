@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="column">
-                    <a href="/student/paper/show/bbb/bb?id={{$student->ID}}" class="fluid large ui orange button">عرض المستمسكات</a>
+                    <a href="/student/paper?id={{$student->ID}}" class="fluid large ui orange button">عرض المستمسكات</a>
                 </div>
             </div>
         </div>
@@ -164,76 +164,6 @@
 
                             <div class="inline fields">
                                 <div class="four wide field">
-                                    <label for="birthdate">تأريخ الميلاد</label>
-                                </div>
-                                <div class="twelve wide field">
-                                    <input type="date" value="{{$student->Birthdate}}" name="birthdate" id="birthdate">
-                                </div>
-                            </div>
-
-                            <div class="inline fields">
-                                <div class="four wide field">
-                                    <label for="level">المرحلة</label>
-                                </div>
-                                <div class="twelve wide field">
-                                    @if($student->Type == \App\Model\Student\StudentType::LEGAL_STUDENT)
-                                        <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                            <input type="hidden" name="level" value="{{\App\Model\Student\Level::getLevelName($student->Level)}}" id="level">
-                                            <i class="dropdown icon"></i>
-                                            <div class="default text"> مرحلة الطالب </div>
-                                            <div class="menu transition hidden" tabindex="-1">
-                                                <div class="item" data-value="{{\App\Model\Student\Level::BEGINNER}}">تمهيدي</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_INTRO}}">مقدمات مرحلة اولى</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_INTRO}}">مقدمات مرحلة ثانية</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_INTRO}}">مقدمات مرحلة ثالثة</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_UP}}">سطوح مرحلة اولى</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_UP}}">سطوح مرحلة ثانية</div>
-                                                <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_UP}}">سطوح مرحلة ثالثة</div>
-                                            </div>
-                                        </div>
-                                    @elseif($student->Type == \App\Model\Student\StudentType::LISTENER)
-                                        <input type="text" name="level" disabled="disabled" value="{{\App\Model\Student\Level::getLevelName($student->Level)}}" id="level">
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="inline fields">
-                                <div class="four wide field">
-                                    <label for="group">الشعبة</label>
-                                </div>
-                                <div class="twelve wide field">
-                                    @if(empty($student->Group))
-                                        <input type="text" value="لايوجد" name="group" id="group">
-                                    @else
-                                        <input type="text" value="{{$student->Group}}" name="group" id="group">
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="inline fields">
-                                <div class="four wide field">
-                                    <label for="scientific_degree">الشهادة</label>
-                                </div>
-                                <div class="twelve wide field">
-                                    <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                        <input type="hidden" name="scientific_degree" value="{{\App\Model\Student\ScientificDegree::getScientificDegree($student->ScientificDegree)}}" id="scientific_degree">
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text"> تحصيلك الدراسي</div>
-                                        <div class="menu transition hidden" tabindex="-1">
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::RELIGION}}">حوزوي</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::INTERMEDIATE_SCHOOL}}">متوسطة</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::HIGH_SCHOOL}}">أعدادية</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::DIPLOMA}}">دبلوم</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::BACHELORS}}">بكالوريوس</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::MASTER}}">دراسات عليا</div>
-                                            <div class="item" data-value="{{\App\Model\Student\ScientificDegree::PHD}}">دكتوراه</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="inline fields">
-                                <div class="four wide field">
                                     <label for="country">البلد</label>
                                 </div>
                                 <div class="twelve wide field">
@@ -251,14 +181,78 @@
                                 </div>
                             </div>
 
-                            <div class="inline fields">
-                                <div class="four wide field">
-                                    <label for="address">العنوان</label>
+                            @if($student->Type == \App\Model\Student\StudentType::LEGAL_STUDENT)
+                                <div class="inline fields">
+                                    <div class="four wide field">
+                                        <label for="birthdate">تأريخ الميلاد</label>
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <input type="date" value="{{$student->Birthdate}}" name="birthdate" id="birthdate">
+                                    </div>
                                 </div>
-                                <div class="twelve wide field">
-                                    <textarea rows="6" name="address" id="address">{{$student->Address}}</textarea>
+
+                                <div class="inline fields">
+                                    <div class="four wide field">
+                                        <label for="level">المرحلة</label>
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
+                                            <input type="hidden" name="level" value="{{\App\Model\Student\Level::getLevelName($student->Level)}}" id="level">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text"> مرحلة الطالب </div>
+                                            <div class="menu transition hidden" tabindex="-1">
+                                                <div class="item" data-value="{{\App\Model\Student\Level::BEGINNER}}">تمهيدي</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_INTRO}}">مقدمات مرحلة اولى</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_INTRO}}">مقدمات مرحلة ثانية</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_INTRO}}">مقدمات مرحلة ثالثة</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_UP}}">سطوح مرحلة اولى</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_UP}}">سطوح مرحلة ثانية</div>
+                                                <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_UP}}">سطوح مرحلة ثالثة</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="inline fields">
+                                    <div class="four wide field">
+                                        <label for="group">الشعبة</label>
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <input type="text" value="{{$student->Group}}" name="group" id="group">
+                                    </div>
+                                </div>
+
+                                <div class="inline fields">
+                                    <div class="four wide field">
+                                        <label for="scientific_degree">الشهادة</label>
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
+                                            <input type="hidden" name="scientific_degree" value="{{\App\Model\Student\ScientificDegree::getScientificDegree($student->ScientificDegree)}}" id="scientific_degree">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text"> تحصيلك الدراسي</div>
+                                            <div class="menu transition hidden" tabindex="-1">
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::RELIGION}}">حوزوي</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::INTERMEDIATE_SCHOOL}}">متوسطة</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::HIGH_SCHOOL}}">أعدادية</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::DIPLOMA}}">دبلوم</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::BACHELORS}}">بكالوريوس</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::MASTER}}">دراسات عليا</div>
+                                                <div class="item" data-value="{{\App\Model\Student\ScientificDegree::PHD}}">دكتوراه</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="inline fields">
+                                    <div class="four wide field">
+                                        <label for="address">العنوان</label>
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <textarea rows="6" name="address" id="address">{{$student->Address}}</textarea>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="inline fields">
                                 <div class="four wide field"></div>
@@ -304,11 +298,7 @@
             <form class="ui form" method="post" action="/student/convert-type" style="text-align: center;">
                 {!! csrf_field() !!}
                 <input type="hidden" name="studentId" value="{{$student->ID}}">
-                @if($student->Type == \App\Model\Student\StudentType::LEGAL_STUDENT)
-                    <h3 class="ui brown header">اذا كنت تريد تحويل الطالب الى مستمع</h3>
-                @elseif($student->Type == \App\Model\Student\StudentType::LISTENER)
-                    <h3 class="ui brown header">اذا كنت تريد تحويل المستمع الى طالب</h3>
-                @endif
+                <h3 class="ui brown header">اذا كنت تريد تحويل الحساب</h3>
                 <button type="submit" class="ui large green button" style="width: 300px;">اضغط هنا</button>
             </form>
         </div>

@@ -23,16 +23,17 @@
         @endif
 
         <div class="sixteen wide column">
-            <div class="ui center aligned one column grid">
+            <div class="ui one column grid">
                 <div class="column">
-                    <div style="background-color: #FFFAF3;">
-                        <div class="lg-space"></div>
+                    <div class="ui segment">
+                        <h2 class="ui center aligned dividing green header">{{$student->Name}}</h2>
+
                         <div class="ui center aligned grid">
                             <div class="twelve wide column">
-
                                 <form class="ui large form" method="post" action="/student/change-password/validation">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="ID" value="{{$student->ID}}">
+
                                     <div class="inline fields">
                                         <div class="four wide field">
                                             <label for="password">كلمة المرور الجديدة</label>
@@ -62,10 +63,8 @@
                                     </div>
                                     <div class="ui error message" id="message"></div>
                                 </form>
-
                             </div>
                         </div>
-                        <div class="lg-space"></div>
                     </div>
                 </div>
             </div>
