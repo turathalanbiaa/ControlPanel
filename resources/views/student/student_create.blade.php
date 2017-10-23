@@ -10,13 +10,14 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
-        @if(session("ChooseAccountMessage"))
-            <div class="sixteen wide column">
-                <div class="ui success large message">
-                    <h2 style="text-align: center;">{{session("ChooseAccountMessage")}}</h2>
-                </div>
+        <div class="sixteen wide column">
+            <div class="ui fluid large black buttons">
+                <a href="/home" class="ui button">الرئيسية</a>
+                <a href="/students/show" class="ui button">بحث عن طالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
             </div>
-        @endif
+        </div>
 
         @if(count($errors))
             <div class="sixteen wide column">
@@ -30,12 +31,20 @@
             </div>
         @endif
 
+        @if(session("CreateAccountMessage"))
+            <div class="sixteen wide column">
+                <div class="ui success large message">
+                    <h2 style="text-align: center;">{{session("CreateAccountMessage")}}</h2>
+                </div>
+            </div>
+        @endif
+
         <div class="sixteen wide column">
             <div class="ui segment">
                 <h2 class="ui center aligned dividing green header">لأنشاء الحساب المطلوب يرجى ملئ المعلومات الأتية</h2>
                 <div class="ui grid">
                     <div class="ten wide column">
-                        <form class="ui big form" method="POST" action="/student/create/validation">
+                        <form class="ui large form" method="POST" action="/student/create/validation">
                             {!! csrf_field() !!}
                             <input type="hidden" value="{{$accountType}}" name="accountType" id="account-type">
 
@@ -44,7 +53,7 @@
                                     <label for="name">الأسم الرباعي واللقب</label>
                                 </div>
                                 <div class="twelve wide field">
-                                    <input type="text" value="" name="name" id="name">
+                                    <input type="text" value="{{old("name")}}" name="name" id="name">
                                 </div>
                             </div>
 
@@ -53,7 +62,7 @@
                                     <label for="email">البريد الإلكتروني</label>
                                 </div>
                                 <div class="twelve wide field">
-                                    <input type="email" value="" name="email" id="email">
+                                    <input type="email" value="{{old("email")}}" name="email" id="email">
                                 </div>
                             </div>
 
@@ -80,7 +89,7 @@
                                     <label for="phone">الهاتف</label>
                                 </div>
                                 <div class="twelve wide field">
-                                    <input type="tel" value="" name="phone" id="phone">
+                                    <input type="tel" value="{{old("phone")}}" name="phone" id="phone">
                                 </div>
                             </div>
 
@@ -112,7 +121,7 @@
                                 </div>
                                 <div class="twelve wide field">
                                     <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                        <input type="hidden" name="country" value="" id="country">
+                                        <input type="hidden" name="country" value="{{old("country")}}" id="country">
                                         <i class="dropdown icon"></i>
                                         <div class="default text"> أختر البلد</div>
                                         <div class="menu transition hidden" tabindex="-1">
@@ -132,7 +141,7 @@
                                     </div>
                                     <div class="twelve wide field">
                                         <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                            <input type="hidden" name="level" value="" id="level">
+                                            <input type="hidden" name="level" value="{{old("level")}}" id="level">
                                             <i class="dropdown icon"></i>
                                             <div class="default text"> أختر مرحلة الطالب </div>
                                             <div class="menu transition hidden" tabindex="-1">
@@ -153,7 +162,7 @@
                                         <label for="group">الشعبة</label>
                                     </div>
                                     <div class="twelve wide field">
-                                        <input type="text" value="" name="group" id="group">
+                                        <input type="text" value="{{old("group")}}" name="group" id="group">
                                     </div>
                                 </div>
 
@@ -163,7 +172,7 @@
                                     </div>
                                     <div class="twelve wide field">
                                         <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                            <input type="hidden" name="scientific_degree" value="" id="scientific_degree">
+                                            <input type="hidden" name="scientific_degree" value="{{old("scientific_degree")}}" id="scientific_degree">
                                             <i class="dropdown icon"></i>
                                             <div class="default text"> تحصيلك الدراسي</div>
                                             <div class="menu transition hidden" tabindex="-1">
@@ -184,7 +193,7 @@
                                         <label for="birthdate">تأريخ الميلاد</label>
                                     </div>
                                     <div class="twelve wide field">
-                                        <input type="date" value="" name="birthdate" id="birthdate">
+                                        <input type="date" value="{{old("birthdate")}}" name="birthdate" id="birthdate">
                                     </div>
                                 </div>
 
@@ -193,7 +202,7 @@
                                         <label for="address">العنوان</label>
                                     </div>
                                     <div class="twelve wide field">
-                                        <textarea rows="5" name="address" id="address"></textarea>
+                                        <textarea rows="5" name="address" id="address">{{old("address")}}</textarea>
                                     </div>
                                 </div>
                             @endif
@@ -201,7 +210,7 @@
                             <div class="inline fields">
                                 <div class="four wide field"></div>
                                 <div class="twelve wide field">
-                                    <button class="ui large orange button" type="submit" style="margin: auto;">حفظ المعلمومات</button>
+                                    <button class="ui large green button" type="submit" style="margin: auto;">حفظ المعلمومات</button>
                                 </div>
                             </div>
                         </form>

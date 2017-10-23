@@ -119,3 +119,15 @@ textarea {
 .ui.button {
     margin: 0;
 }
+
+.ui.radio.checkbox label
+{
+    padding-right: 1.85714em;
+    padding-left: 0;
+}
+
+.ui.radio.checkbox label:before,
+.ui.radio.checkbox label:after
+{
+    right: 0;
+}

@@ -10,6 +10,16 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
+        <div class="sixteen wide column">
+            <div class="ui fluid large black buttons">
+                <a href="/home" class="ui button">الرئيسية</a>
+                <a href="/students/show" class="ui button">بحث عن طالب</a>
+                <a href="/student/info-{{$student->ID}}" class="ui button">عرض معلومات الطالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
+            </div>
+        </div>
+
         @if(count($errors))
             <div class="sixteen wide column">
                 <div class="ui error message" id="message">
@@ -27,7 +37,7 @@
                 <div class="column">
                     <div class="ui segment">
                         <h2 class="ui center aligned dividing green header">{{$student->Name}}</h2>
-
+                        <div class="lg-space"></div>
                         <div class="ui center aligned grid">
                             <div class="twelve wide column">
                                 <form class="ui large form" method="post" action="/student/change-password/validation">
@@ -56,8 +66,8 @@
                                         <div class="four wide field"></div>
                                         <div class="twelve wide field">
                                             <div style="width:100%; margin: auto;">
-                                                <button class="ui orange large button" type="submit">حفظ</button>
-                                                <a href="/student/info-{{$student->ID}}" class="ui orange large button">رجوع</a>
+                                                <button class="ui green large button" type="submit">حفظ</button>
+                                                <a href="/student/info-{{$student->ID}}" class="ui green large button">رجوع</a>
                                             </div>
                                         </div>
                                     </div>
@@ -65,52 +75,10 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="lg-space"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section("script")
-    <script>
-        $('.ui.form')
-            .form({
-                on: 'blur',
-                fields: {
-                    password: {
-                        identifier: 'password',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'يرجى أدخال كلمة المرور.'
-                            },
-                            {
-                                type   : 'minLength[6]',
-                                prompt : 'يجب ان تكون كلمة المرور لا تقل عن {ruleValue} حروف.'
-                            }
-                        ]
-                    },
-                    password_confirmation: {
-                        identifier: 'password_confirmation',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'يرجى أدخال كلمة المرور.'
-                            },
-                            {
-                                type   : 'minLength[6]',
-                                prompt : 'يجب ان تكون كلمة المرور لا تقل عن {ruleValue} حروف.'
-                            },
-                            {
-                                type   : 'match[password]',
-                                prompt : 'كلمتا المرور غير متطابقتان.'
-                            }
-
-                        ]
-                    }
-                }
-            })
-        ;
-    </script>
 @endsection

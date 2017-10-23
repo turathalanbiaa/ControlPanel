@@ -10,6 +10,16 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
+        <div class="sixteen wide column">
+            <div class="ui fluid large black buttons">
+                <a href="/home" class="ui button">الرئيسية</a>
+                <a href="/students/show" class="ui button">بحث عن طالب</a>
+                <a href="/student/info-{{$student->ID}}" class="ui button">عرض معلومات الطالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
+            </div>
+        </div>
+
         @if(count($errors))
             <div class="sixteen wide column">
                 <div class="ui error message" id="message">
@@ -27,7 +37,7 @@
                 <h2 class="ui center aligned dividing green header">البيانات المطلوبة لتحويل المستمع الى طالب </h2>
                 <div class="ui grid">
                     <div class="ten wide column">
-                        <form class="ui big form" method="POST" action="/student/convert-listener-to-student/Validation">
+                        <form class="ui large form" method="POST" action="/student/convert-listener-to-student/Validation">
                             {!! csrf_field() !!}
                             <input type="hidden" name="ID" value="{{$student->ID}}">
 
@@ -123,7 +133,7 @@
                             <div class="inline fields">
                                 <div class="four wide field"></div>
                                 <div class="twelve wide field">
-                                    <button class="ui large orange button" type="submit" style="margin: auto;">حفظ التعديلات</button>
+                                    <button class="ui large green button" type="submit" style="margin: auto;">حفظ التعديلات</button>
                                 </div>
                             </div>
                         </form>

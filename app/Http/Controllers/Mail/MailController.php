@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mail;
 
+use App\Model\EventLog\EventLog;
 use App\Model\Student\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,13 +23,16 @@ class MailController extends Controller
 
         if ($verifiedEmailType == 1)
         {
-
+            if ($student->VerifiedEmail == 1)
+                return redirect("/student/info-$student->ID")->with("VerifiedEmailMessage","هذا الطالب حسابه مفعل مسبقاً");
 
             $success = $this->sendMail($request, $student);
 
             if(!$success)
                 return redirect("/student/info-$student->ID")->with("VerifiedEmailMessage","لم تتم عملية ارسال رسالة تفعيل الحساب الى الطالب.");
 
+            $description = $student->ID .":-" .$student->Name;
+            EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["ACTIVE ACCOUNT BY SEND MESSAGE TO EMAIL"], $description);
             return redirect("/student/info-$student->ID")->with("VerifiedEmailMessage"," تمت عملية ارسال رسالة تفعيل الحساب الى الطالب بنجاح.");
         }
 
@@ -44,6 +48,8 @@ class MailController extends Controller
             if (!$success)
                 return redirect("/student/info-$student->ID")->with("VerifiedEmailMessage","لم يتم تفعيل حساب الطالب.");
 
+            $description = $student->ID .":-" .$student->Name;
+            EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["ACTIVE ACCOUNT BY SET 'VerifiedEmail=1'"], $description);
             return redirect("/student/info-$student->ID")->with("VerifiedEmailMessage","تم تفعيل حساب الطالب.ً");
         }
 

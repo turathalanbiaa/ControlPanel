@@ -5,52 +5,23 @@
 @endsection
 
 @section("content")
-    <style>
-        .ui.radio.checkbox label
-        {
-            padding-right: 1.85714em;
-            padding-left: 0;
-        }
-
-        .ui.radio.checkbox label:before,
-        .ui.radio.checkbox label:after
-        {
-            right: 0;
-        }
-    </style>
     <div class="ui grid">
         <div class="sixteen wide column">
             @include("layout.welcome_to_control_panel")
         </div>
 
         <div class="sixteen wide column">
-            <div class="ui six column grid">
-                <div class="column">
-                    <a href="/home" class="fluid large ui orange button">الرئيسية</a>
-                </div>
-
-                <div class="column">
-                    <a href="/students/show" class="fluid large ui orange button">بحث عن طالب</a>
-                </div>
-
-                <div class="column">
-                    <a href="/student/change-password/{{$student->ID}}" class="fluid large ui orange button">تغيير كلمة المرور</a>
-                </div>
-
-                <div class="column">
-                    <button class="fluid large ui orange button" id="verificationEmail">تفعيل الحساب</button>
-                </div>
-
-                <div class="column">
-                    <button class="fluid large ui orange button" id="convertStudentType">تحويل الحساب</button>
-                </div>
-
-                <div class="column">
-                    <a href="/student/paper?id={{$student->ID}}" class="fluid large ui orange button">عرض المستمسكات</a>
-                </div>
+            <div class="ui fluid large black buttons">
+                <a href="/home" class="ui button">الرئيسية</a>
+                <a href="/students/show" class="ui button">بحث عن طالب</a>
+                <a href="/student/change-password/{{$student->ID}}" class="ui button">تغيير كلمة المرور</a>
+                <button class="ui button" id="verificationEmail">تفعيل الحساب</button>
+                <button class="ui button" id="convertStudentType">تحويل الحساب</button>
+                <a href="/student/paper?id={{$student->ID}}" class="ui button">عرض المستمسكات</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
+                <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
             </div>
         </div>
-
 
         @if(count($errors))
             <div class="sixteen wide column">
@@ -109,7 +80,7 @@
                 <h2 class="ui center aligned dividing green header">بيانات الطالب</h2>
                 <div class="ui grid">
                     <div class="ten wide column">
-                        <form class="ui big form" method="POST" action="/student/update">
+                        <form class="ui large form" method="POST" action="/student/update">
                             {!! csrf_field() !!}
                             <input type="hidden" name="ID" value="{{$student->ID}}">
 
@@ -257,7 +228,7 @@
                             <div class="inline fields">
                                 <div class="four wide field"></div>
                                 <div class="twelve wide field">
-                                    <button class="ui large orange button" type="submit" style="margin: auto;">حفظ التعديلات</button>
+                                    <button class="ui large green button" type="submit" style="margin: auto;">حفظ التعديلات</button>
                                 </div>
                             </div>
                         </form>

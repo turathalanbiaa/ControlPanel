@@ -1,30 +1,6 @@
 @extends("layout.main_layout")
 
 @section("content")
-    <style>
-        .ui.form .inline.fields>label
-        {
-            margin: .035714em 0.5em 0 1em;
-        }
-
-        .ui.form .inline.fields .field
-        {
-            padding: 0 0 0 1em;
-        }
-
-        .ui.radio.checkbox label
-        {
-            padding-right: 1.85714em;
-            padding-left: 0;
-        }
-
-        .ui.radio.checkbox label:before,
-        .ui.radio.checkbox label:after
-        {
-            right: 0;
-        }
-    </style>
-
     <div class="ui grid">
         <div class="sixteen wide column">
             @include("layout.welcome_to_control_panel")
@@ -33,7 +9,7 @@
         <div class="sixteen wide column">
             <div class=" ui grid">
                 <div class="ten wide column">
-                    <form class="ui big form" method="get" action="/students/search" dir="rtl">
+                    <form class="ui large form" method="get" action="/students/search" dir="rtl">
                         <div class="ui left icon input" style="width: 100%; text-align: right;">
                             <input type="text" placeholder="بحث عن طالب" name="query" value="" style="text-align: right;">
                             <i class="search icon"></i>
@@ -66,7 +42,7 @@
                 </div>
 
                 <div class="six wide column">
-                    <div class="ui fluid orange big three buttons">
+                    <div class="ui fluid black large three buttons">
                         <a href="/home"  class="ui button">الرئيسية</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
@@ -74,6 +50,14 @@
                 </div>
             </div>
         </div>
+
+        @if(session("ChooseAccountMessage"))
+            <div class="sixteen wide column">
+                <div class="ui success large message">
+                    <h2 style="text-align: center;">{{session("ChooseAccountMessage")}}</h2>
+                </div>
+            </div>
+        @endif
 
         @if(session("CreateAccountMessage"))
             <div class="sixteen wide column">

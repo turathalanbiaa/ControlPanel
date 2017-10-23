@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Model\EventLog\EventLog;
 use App\Model\Main\Authorization;
 use App\Model\Main\Login;
 use App\Model\Main\Map;
@@ -63,16 +64,16 @@ class StudentController extends Controller
         if($optionSearch == 2)
         {
             //Search about student using name.
-            $students = Student::where('name', 'LIKE', '%'.$query.'%')->get();
+            $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();
         }
         elseif($optionSearch == 3)
         {
             //Search about student using email.
-            $students = Student::where('email', 'LIKE', '%'.$query.'%')->get();
+            $students = Student::where('email', 'LIKE', '%'.$query.'%')->take(100)->get();;
         }
         else
         {
-            $students = Student::where('name', 'LIKE', '%'.$query.'%')->get();
+            $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();;
         }
 
         return view("student.student")->with([
@@ -207,6 +208,8 @@ class StudentController extends Controller
         if (!$success)
             return redirect("/student/create/$accountType")->with('CreateAccountMessage', 'لم يتم اضافة الطالب أعد المحاولة مرة أخرى.');
 
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["ADD STUDENT"], $description);
         return redirect("/student/create/$accountType")->with('CreateAccountMessage', 'تمت عملية انشاء الحساب بنجاح.');
     }
 
@@ -224,6 +227,8 @@ class StudentController extends Controller
         if(!$success)
             return redirect("/students/show")->with('DeleteMessage', "لم يتم حذف الطالب يرجى المحاولة مرة أخرى");
 
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["DELETE STUDENT"], $description);
         return redirect("/students/show")->with('DeleteMessage', "تم حذف الطالب بنجاح");
     }
 
@@ -319,6 +324,8 @@ class StudentController extends Controller
         if (!$success)
             return redirect("/student/info-$student->ID")->with('UpdateMessage', 'لم يتم تعديل البيانات بنجاح يرجى اعادة العملية من جديد');
 
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["UPDATE STUDENT"], $description);
         return redirect("/student/info-$student->ID")->with('UpdateMessage', 'تم تعديل بيانات الطالب بنجاح.');
     }
 
@@ -365,6 +372,9 @@ class StudentController extends Controller
         if(!$success)
             return redirect("/student/info-$student->ID")->with('ChangePasswordMessage', "لم يتم تغيير كلمة المرور الطالب ".$student->Name." يرجى المحاولة مرة أخرى");
 
+
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["CHANGE PASSWORD"], $description);
         return redirect("/student/info-$student->ID")->with('ChangePasswordMessage', "تم تغيير كلمة المرور الطالب : ".$student->Name);
     }
 
@@ -389,6 +399,8 @@ class StudentController extends Controller
             if (!$success)
                 return redirect("/student/info-$student->ID")->with("ConvertTypeMessage","لم يتم تحويل حساب الطالب الى مستمع، اعد المحاولة مرة أخرى.");
 
+            $description = $student->ID .":-" .$student->Name;
+            EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["CONVERT LEGAL STUDENT TO LISTENER"], $description);
             return redirect("/student/info-$student->ID")->with("ConvertTypeMessage","تم تحويل حساب الطالب الى مستمع.");
         }
 
@@ -457,6 +469,8 @@ class StudentController extends Controller
         if(!$success)
             return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "لم يتم تحويل المستع ( ".$student->Name." ) الى طالب، يرجى اعادة المحاولة.");
 
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["CONVERT LISTENER TO LEGAL STUDENT"], $description);
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
 
