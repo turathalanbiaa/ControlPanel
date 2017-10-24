@@ -27,7 +27,7 @@
                 <td>{{$student->Group}}</td>
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
-                        <a href="/student/info-{{$student->ID}}" class="ui teal button">عرض</a>
+                        <a href="/student/info-{{$student->ID}}" class="ui green button">عرض</a>
                         <button class="ui red button" data-action="delete-student" data-id="{{$student->ID}}" data-content="{{$student->Name}}">حذف</button>
                     </div>
                 </td>
@@ -36,10 +36,11 @@
     @else
         <tr>
             <td colspan="7">
-                <div class="lg-space"></div>
-                <div class="lg-space"></div>
+                <div class="md-space"></div>
+                <div class="md-space"></div>
                 <h1 class="center aligned">لا توجد نتأئج</h1>
-                <div class="lg-space"></div>
+                <div class="md-space"></div>
+                <div class="md-space"></div>
             </td>
         </tr>
     @endif

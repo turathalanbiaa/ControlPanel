@@ -474,23 +474,28 @@ class StudentController extends Controller
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
 
-
-
-
-
-
     public function paper()
     {
         $id = Input::get("id");
         $student = Student::find($id);
 
-        abort(404);
-        die();
+        if(!$student)
+            return redirect("/students/show")->with('InfoMessage', "لا يوجد مثل هذا طالب لعرض معلوماته.");
 
-        if (!$student)
-            return redirect("/student/info-$student->ID");
+        $papers = ["1"=>[], "2"=>[], "3"=>[]];
+        foreach ($student->Paper as $paper)
+        {
+            $key = $paper->Type;
 
-        return view("student.student_paper");
+            switch ($key)
+            {
+                case 1: $papers["1"] = $paper; break;
+                case 2: $papers["2"] = $paper; break;
+                case 3: $papers["3"] = $paper; break;
+            }
+        }
+
+        return view("student.student_paper")->with(["student"=>$student, "papers"=>$papers]);
     }
 }
 

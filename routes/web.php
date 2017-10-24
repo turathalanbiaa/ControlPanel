@@ -39,16 +39,7 @@ Route::post('/student/convert-type', 'Student\\StudentController@convertStudentT
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
 
-Route::get('/student/paper', function (){
-    $list = [1,2,3,4,5,6,7,8];
-    $key = $_GET['id'];
-
-    if (in_array($key, $list))
-        return "Found This ID";
-
-        return abort(404,"this error", []);
-
-});
+Route::get('/student/paper','Student\\StudentController@paper');
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
 Route::post('/courses/search', 'Course\\CourseController@search');
