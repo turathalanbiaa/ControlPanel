@@ -32,13 +32,22 @@
                         <div class="ui bottom attached inverted segment">
                             <div class="ui three column grid">
                                 <div class="column">
-                                    <button class="ui fluid inverted yellow button" data-action="show">عرض</button>
+                                    <button class="ui fluid inverted yellow button @if(empty($papers['1'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['1'])) {{"data-action=show"}} @endif>
+                                        <span>عرض</span>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button">قبول</div>
+                                    <div class="ui fluid inverted green button @if(empty($papers['1'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['1'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["1"]->ID}} @endif>
+                                        <span>قبول</span>
+                                    </div>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button">رفض</div>
+                                    <div class="ui fluid inverted blue button @if(empty($papers['1'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['1'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["1"]->ID}} @endif>
+                                        <span>رفض</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,13 +71,22 @@
                         <div class="ui bottom attached inverted segment">
                             <div class="ui three column grid">
                                 <div class="column">
-                                    <button class="ui fluid inverted yellow button" data-action="show">عرض</button>
+                                    <button class="ui fluid inverted yellow button @if(empty($papers['2'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['2'])) {{"data-action=show"}} @endif>
+                                        <span>عرض</span>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button">قبول</div>
+                                    <div class="ui fluid inverted green button @if(empty($papers['2'])) {{"disabled"}} @endif"
+                                        @if(!empty($papers['2'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["2"]->ID}} @endif>
+                                        <span>قبول</span>
+                                    </div>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button">رفض</div>
+                                    <div class="ui fluid inverted blue button @if(empty($papers['2'])) {{"disabled"}} @endif"
+                                        @if(!empty($papers['2'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["2"]->ID}} @endif>
+                                        <span>رفض</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,14 +110,24 @@
                         <div class="ui bottom attached inverted segment">
                             <div class="ui three column grid">
                                 <div class="column">
-                                    <button class="ui fluid inverted yellow button" data-action="show">عرض</button>
+                                    <button class="ui fluid inverted yellow button @if(empty($papers['3'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['3'])) {{"data-action=show"}} @endif>
+                                        <span>عرض</span>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button">قبول</div>
+                                    <div class="ui fluid inverted green button @if(empty($papers['3'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['3'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["3"]->ID}} @endif>
+                                        <span>قبول</span>
+                                    </div>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button">رفض</div>
+                                    <div class="ui fluid inverted blue button @if(empty($papers['3'])) {{"disabled"}} @endif"
+                                    @if(!empty($papers['3'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["3"]->ID}} @endif>
+                                        <span>رفض</span>
+                                    </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
