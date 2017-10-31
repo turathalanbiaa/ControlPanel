@@ -65,9 +65,9 @@
                                     <div class="inline fields">
                                         <div class="four wide field"></div>
                                         <div class="twelve wide field">
-                                            <div style="width:100%; margin: auto;">
-                                                <button class="ui green large button" type="submit">حفظ</button>
-                                                <a href="/student/info-{{$student->ID}}" class="ui green large button">رجوع</a>
+                                            <div class="ui two large green buttons">
+                                                <button class="ui button" type="submit">حفظ</button>
+                                                <a class="ui button" href="/student/info-{{$student->ID}}">رجوع</a>
                                             </div>
                                         </div>
                                     </div>

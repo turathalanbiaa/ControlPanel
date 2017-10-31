@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +45,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //check if exception is an instance of ModelNotFoundException.
+        if ($exception instanceof MethodNotAllowedHttpException) {
+
+            return response()->redirectTo("/errors/404");
+        }
+
         return parent::render($request, $exception);
     }
 

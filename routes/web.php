@@ -16,6 +16,10 @@ Route::get('/home', "Main\\MainController@index");
 Route::get('/login', 'Main\\MainController@login');
 Route::post('/login-validation', 'Main\\MainController@loginValidation');
 Route::post('/redirect', 'Main\\MainController@redirect');
+Route::get('/errors/404', function ()
+{
+    return view('message.warning_message');
+});
 Route::get('/logout', function () {
     session_destroy();
     return redirect('/');
@@ -25,16 +29,15 @@ Route::get('/students/show', 'Student\\StudentController@showAll');
 Route::get('/students/search', 'Student\\StudentController@search');
 Route::get('/student/create/{accountType}', 'Student\\StudentController@create');
 Route::post('/student/create/validation', 'Student\\StudentController@createValidation');
-
 Route::get('/student/info-{id}', 'Student\\StudentController@info');
 Route::post('/student/update', 'Student\\StudentController@update');
-
-
 Route::post('/student/delete', 'Student\\StudentController@delete');
 Route::get('/student/change-password/{id}', 'Student\\StudentController@changePassword');
 Route::post('/student/change-password/validation', 'Student\\StudentController@changePasswordValidation');
+
 Route::post('/mail/verification-email','Mail\\MailController@verificationEmail');
 Route::get('/mail/send','Mail\\MailController@sendMessage');
+
 Route::post('/student/convert-type', 'Student\\StudentController@convertStudentType');
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');

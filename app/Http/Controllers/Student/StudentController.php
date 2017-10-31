@@ -56,24 +56,12 @@ class StudentController extends Controller
         if($query == '')
             return redirect("/students/show");
 
-        if($optionSearch == 1)
+        switch ($optionSearch)
         {
-            //Search about student using id.
-            $students = Student::find($query);
-        }
-        if($optionSearch == 2)
-        {
-            //Search about student using name.
-            $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();
-        }
-        elseif($optionSearch == 3)
-        {
-            //Search about student using email.
-            $students = Student::where('email', 'LIKE', '%'.$query.'%')->take(100)->get();;
-        }
-        else
-        {
-            $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();;
+            case 1 : $students = Student::where('ID', '=', $query)->get(); break;
+            case 2 : $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get(); break;
+            case 3 : $students = Student::where('email', 'LIKE', '%'.$query.'%')->take(100)->get(); break;
+            default: $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();
         }
 
         return view("student.student")->with([
@@ -89,17 +77,11 @@ class StudentController extends Controller
         if (!Authorization::authorize(Map::MAPS["Student"]))
             return view("message.warning_message");
 
-        if ($accountType == StudentType::LEGAL_STUDENT)
+        switch ($accountType)
         {
-            return view("student.student_create")->with("accountType",$accountType);
-        }
-        elseif ($accountType == StudentType::LISTENER)
-        {
-            return view("student.student_create")->with("accountType",$accountType);
-        }
-        else
-        {
-            return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
+            case StudentType::LEGAL_STUDENT : return view("student.student_create")->with("accountType",$accountType); break;
+            case StudentType::LISTENER : return view("student.student_create")->with("accountType",$accountType); break;
+            default : return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
         }
     }
 
@@ -107,11 +89,12 @@ class StudentController extends Controller
     {
         $accountType = Input::get("accountType");
 
-        if ($accountType == StudentType::LEGAL_STUDENT)
+        switch ($accountType)
         {
-            $this->validate($request,[
+            case StudentType::LEGAL_STUDENT :
+                $this->validate($request,[
                 'name' => 'required',
-                'email' => 'required|email|unique:student',
+                'email' => 'required|email|unique:student,Email',
                 'password' => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
                 'phone' => 'required',
@@ -122,51 +105,49 @@ class StudentController extends Controller
                 'birthdate' => 'required|date',
                 'address' => 'required',
             ], [
-                'name.required' => 'حقل الأسم فارغ.',
-                'email.required' => 'حقل البريد الإلكتروني فارغ.',
+                'name.required' => 'الأسم فارغ.',
+                'email.required' => 'البريد الإلكتروني فارغ.',
                 'email.unique' => 'البريد الإلكتروني موجود مسبقا.',
-                'password.required' => 'حقل كلمة المرور فارغه.',
-                'password_confirmation.required' => 'حقل اعد كتابة كلمة المرور فارغه.',
-                'password.min' => 'حقل كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
-                'password_confirmation.min' => 'حقل اعد كتابة كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
+                'password.required' => 'حقل كلمة المرور فارغ.',
+                'password_confirmation.required' => 'حقل اعد كتابة كلمة المرور فارغ.',
+                'password.min' => 'كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
+                'password_confirmation.min' => 'اعد كتابة كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
                 'password.confirmed' => 'كلمتا المرور غير متطابقتين.',
-                'phone.required' => 'حقل الهاتف فارغ.',
+                'phone.required' => 'الهاتف فارغ.',
                 'gender.required' => 'يجب اختيار الجنس.',
                 'country.required' => 'يجب اختيار البلد.',
                 'level.required' => 'يجب اختيار المرحلة.',
                 'scientific_degree.required' => 'يجب اختيار الشهادة.',
-                'birthdate.required' => 'حق تاريخ الميلاد فارغ.',
+                'birthdate.required' => 'تاريخ الميلاد فارغ.',
                 'address.required' => 'حقل العنوان فارغ.',
             ]);
+                break;
 
-        }
-        elseif ($accountType == StudentType::LISTENER)
-        {
-            $this->validate($request,[
+            case StudentType::LISTENER :
+                $this->validate($request,[
                 'name' => 'required',
-                'email' => 'required|email|unique:student',
+                'email' => 'required|email|unique:student,Email',
                 'password' => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
                 'phone' => 'required',
                 'gender' => 'required',
                 'country' => 'required',
             ], [
-                'name.required' => 'حقل الأسم فارغ.',
-                'email.required' => 'حقل البريد الإلكتروني فارغ.',
+                'name.required' => 'الأسم فارغ.',
+                'email.required' => 'البريد الإلكتروني فارغ.',
                 'email.unique' => 'البريد الإلكتروني موجود مسبقا.',
-                'password.required' => 'حقل كلمة المرور فارغه.',
-                'password_confirmation.required' => 'حقل اعد كتابة كلمة المرور فارغه.',
+                'password.required' => 'كلمة المرور فارغه.',
+                'password_confirmation.required' => 'حقل اعد كتابة كلمة المرور فارغ.',
                 'password.min' => 'حقل كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
                 'password_confirmation' => 'حقل اعد كتابة كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
                 'password.confirmed' => 'كلمتا المرور غير متطابقتين.',
-                'phone.required' => 'حقل الهاتف فارغ.',
+                'phone.required' => 'الهاتف فارغ.',
                 'gender.required' => 'يرجى اختيار الجنس.',
                 'country.required' => 'يرجى اختيار البلد.',
             ]);
-        }
-        else
-        {
-            return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
+                break;
+
+            default : return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
         }
 
         $student = new Student;
@@ -199,7 +180,7 @@ class StudentController extends Controller
         $student->RegisterDate = date("Y-m-d");
         $student->VerifiedEmail = 1;
         $student->EmailVerificationCode = null;
-        $student->Image = null;
+        $student->Image = "student.png";
         $student->Supervisor = null;
         $student->SessionID = null;
 
@@ -216,7 +197,6 @@ class StudentController extends Controller
     public function delete()
     {
         $ID = Input::get("studentID");
-
         $student = Student::find($ID);
 
         if(!$student)
@@ -266,7 +246,6 @@ class StudentController extends Controller
                 'country' => 'required',
                 'birthdate' => 'required|date',
                 'level' => 'required',
-                'group' => 'required',
                 'scientific_degree' => 'required',
                 'address' => 'required',
             ], [
@@ -278,7 +257,6 @@ class StudentController extends Controller
                 'country.required' => 'يرجى اختيار البلد.',
                 'birthdate.required' => 'تاريخ الميلاد فارغ.',
                 'level.required' => 'يرجى اختيار المرحلة.',
-                'group.required' => 'يجب ادخال الشعبة.',
                 'scientific_degree.required' => 'يرجى اختيار الشهادة.',
                 'address.required' => 'العنوان فارغ.',
             ]);
@@ -351,10 +329,10 @@ class StudentController extends Controller
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
         ], [
-            'password.required' => 'حقل كلمة المرور فارغه.',
-            'password_confirmation.required' => 'حقل اعد كتابة كلمة المرور فارغه.',
-            'password.min' => 'حقل كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
-            'password_confirmation.min' => 'حقل اعد كتابة كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
+            'password.required' => 'كلمة المرور فارغه.',
+            'password_confirmation.required' => 'اعد كتابة كلمة المرور فارغه.',
+            'password.min' => 'كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
+            'password_confirmation.min' => 'اعد كتابة كلمة المرور قصيرة,يجب ان تتكون كلمة المرور من 6 أحرف على الأقل.',
             'password.confirmed' => 'كلمتا المرور غير متطابقتين.',
         ]);
 
@@ -377,6 +355,12 @@ class StudentController extends Controller
         EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["CHANGE PASSWORD"], $description);
         return redirect("/student/info-$student->ID")->with('ChangePasswordMessage', "تم تغيير كلمة المرور الطالب : ".$student->Name);
     }
+
+
+
+
+
+
 
     public function convertStudentType()
     {
@@ -473,6 +457,9 @@ class StudentController extends Controller
         EventLog::addEvent(EventLog::STUDENT_EVENTS_LOG["CONVERT LISTENER TO LEGAL STUDENT"], $description);
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
+
+
+
 
     public function paper()
     {
