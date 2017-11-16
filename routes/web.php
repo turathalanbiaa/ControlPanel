@@ -34,14 +34,11 @@ Route::post('/student/update', 'Student\\StudentController@update');
 Route::post('/student/delete', 'Student\\StudentController@delete');
 Route::get('/student/change-password/{id}', 'Student\\StudentController@changePassword');
 Route::post('/student/change-password/validation', 'Student\\StudentController@changePasswordValidation');
-
 Route::post('/mail/verification-email','Mail\\MailController@verificationEmail');
 Route::get('/mail/send','Mail\\MailController@sendMessage');
-
 Route::post('/student/convert-type', 'Student\\StudentController@convertStudentType');
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
-
 Route::get('/student/paper','Student\\StudentController@paper');
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
@@ -71,10 +68,10 @@ Route::get('/lecturer/info-{id}', 'Lecturer\\LecturerController@info');
 
 Route::get('/lecturer/create', 'Lecturer\\LecturerController@create');
 /***********************************************************************************************************/
-Route::get('/timetable/show', 'TimeTable\\TimeTableController@show');
-Route::post('/timetable/{text}/show', 'TimeTable\\TimeTableController@timeTable');
-Route::post('/timetable/search', 'TimeTable\\TimeTableController@search');
-Route::get('/timetable/levels', 'TimeTable\\TimeTableController@timetableForEachLevels');
-Route::get('/timetable/add-lesson/{text}/{group}', 'TimeTable\\TimeTableController@addLessonToTimetable');
-Route::post('/timetable/add-lesson-validate', 'TimeTable\\TimeTableController@addLessonValidation');
+Route::get('/timetable/show', 'Timetable\\TimetableController@show');
+Route::post('/timetable/{text}/show', 'Timetable\\TimetableController@timeTable');
+Route::post('/timetable/search', 'Timetable\\TimetableController@search');
+Route::get('/timetable/levels', 'Timetable\\TimetableController@timetableForEachLevels');
+Route::get('/timetable/add-lesson/{text}/{group}', 'Timetable\\TimetableController@addLessonToTimetable');
+Route::post('/timetable/add-lesson-validate', 'Timetable\\TimetableController@addLessonValidation');
 /***********************************************************************************************************/

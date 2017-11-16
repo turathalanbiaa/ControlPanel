@@ -356,12 +356,6 @@ class StudentController extends Controller
         return redirect("/student/info-$student->ID")->with('ChangePasswordMessage', "تم تغيير كلمة المرور الطالب : ".$student->Name);
     }
 
-
-
-
-
-
-
     public function convertStudentType()
     {
         $studentId = Input::get("studentId");

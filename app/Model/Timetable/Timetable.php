@@ -6,14 +6,14 @@ use App\Model\Student\Level;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class TimeTable extends Model
+class Timetable extends Model
 {
     protected $table = "lesson_timetable";
     protected $primaryKey = "ID";
     public $timestamps = false;
 
 
-    public static function getTimeTable($level, $group)
+    public static function getTimetable($level, $group)
     {
         return DB::table("lesson_timetable")
             ->where('Level', '=', $level)
@@ -21,7 +21,7 @@ class TimeTable extends Model
             ->get();
     }
 
-    public static function getTimeTableForDate($level, $group, $date)
+    public static function getTimetableForDate($level, $group, $date)
     {
         return DB::select("SELECT * FROM `lesson`, `lesson_timetable` 
                             WHERE `lesson`.`ID` = `lesson_timetable`.`Lesson_ID` 
@@ -35,7 +35,7 @@ class TimeTable extends Model
         return DB::select("SELECT `Level`, `Group` FROM lesson_timetable GROUP BY `Level`, `Group`");
     }
 
-    public static function getTimeTableForBeginner()
+    public static function getTimetableForBeginner()
     {
         $success = DB::table("lesson_timetable")
             ->where('Level', '=', Level::BEGINNER)
@@ -44,7 +44,7 @@ class TimeTable extends Model
         return $success;
     }
 
-    public static function getTimeTableForFirstLevelIntro()
+    public static function getTimetableForFirstLevelIntro()
     {
         $success = DB::table("lesson_timetable")
             ->where('Level', '=', Level::FIRST_LEVEL_INTRO)
@@ -53,7 +53,7 @@ class TimeTable extends Model
         return $success;
     }
 
-    public static function getTimeTableForSecondLevelIntro()
+    public static function getTimetableForSecondLevelIntro()
     {
         $success = DB::table("lesson_timetable")
             ->where('Level', '=', Level::SECOND_LEVEL_INTRO)
@@ -62,7 +62,7 @@ class TimeTable extends Model
         return $success;
     }
 
-    public static function getTimeTableForThirdLevelIntro()
+    public static function getTimetableForThirdLevelIntro()
     {
         $success = DB::table("lesson_timetable")
             ->where('Level', '=', Level::THIRD_LEVEL_INTRO)
