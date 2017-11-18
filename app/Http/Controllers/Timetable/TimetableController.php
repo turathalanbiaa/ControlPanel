@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class TimeTableController extends Controller
+class TimetableController extends Controller
 {
 
     public function show()
