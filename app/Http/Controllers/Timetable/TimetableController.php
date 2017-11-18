@@ -22,15 +22,12 @@ class TimetableController extends Controller
         if (!Authorization::authorize(Map::MAPS["TimeTable"]))
             return view("message.warning_message");
 
-        echo "wrjiwe";
-        die();
-
         $timetableMap = Timetable::getTimetableMap();
 
         return view("timetable.timetable_show")->with(["timetableMap" => $timetableMap]);
     }
 
-    public function timeTable()
+    public function timetable()
     {
         $state = 1;
         $level = Input::get("level");

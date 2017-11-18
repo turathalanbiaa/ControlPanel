@@ -69,7 +69,7 @@ Route::get('/lecturer/info-{id}', 'Lecturer\\LecturerController@info');
 Route::get('/lecturer/create', 'Lecturer\\LecturerController@create');
 /***********************************************************************************************************/
 Route::get('/timetable/show', 'Timetable\\TimetableController@show');
-Route::post('/timetable/{text}/show', 'Timetable\\TimetableController@timeTable');
+Route::post('/timetable/{text}/show', 'Timetable\\TimetableController@timetable');
 Route::post('/timetable/search', 'Timetable\\TimetableController@search');
 Route::get('/timetable/levels', 'Timetable\\TimetableController@timetableForEachLevels');
 Route::get('/timetable/add-lesson/{text}/{group}', 'Timetable\\TimetableController@addLessonToTimetable');
