@@ -1,7 +1,7 @@
 @extends("layout.main_layout")
 
 @section("title")
-    <title>الجدول الدراسي</title>
+    <title>اضافة الدروس الى الجدول الدراسي</title>
 @endsection
 
 @section("content")
@@ -10,54 +10,17 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
-        <div class="sixteen wide column">
-            <div class="ui four column grid">
-                <div class="column">
-                    <a href="/home" class="ui fluid orange big button">الرئيسية</a>
-                </div>
-
-                <div class="column">
-                    <a href="/timetable/levels" class="ui fluid orange big button">عرض الجداول الدراسية لكل مرحلة</a>
-                </div>
-            </div>
-        </div>
-
-        @if(session("AddLessonMessage"))
-            <div class="sixteen wide column">
-                <div class="ui success large message">
-                    <h2 style="text-align: center;">{{session("AddLessonMessage")}}</h2>
-                </div>
-            </div>
-        @endif
 
         <div class="sixteen wide column">
             <div class="ui segment">
                 <div class="ui grid">
                     <div class="eight wide column">
-                        <form class="ui big form" method="post" action="/timetable/add-lesson-validate">
+                        <form class="ui big form" method="post" action="/timetable/add-lessons">
                             {!! csrf_field() !!}
+
                             <input type="hidden" name="level" value="{{$level}}">
+
                             <input type="hidden" name="group" value="{{$group}}">
-
-                            <div class="inline fields">
-                                <div class="three wide field">
-                                    <label for="l">المرحلة :- </label>
-                                </div>
-
-                                <div class="thirteen wide field">
-                                    <input type="text" name="l" id="l" value="{{\App\Model\Student\Level::getLevelName($level)}}" disabled="disabled">
-                                </div>
-                            </div>
-
-                            <div class="inline fields">
-                                <div class="three wide field">
-                                    <label for="g">الشعبة :- </label>
-                                </div>
-
-                                <div class="thirteen wide field">
-                                    <input type="text" name="g" id="g" value="{{$group}}" disabled="disabled">
-                                </div>
-                            </div>
 
                             <div class="inline fields">
                                 <div class="three wide field">
@@ -65,7 +28,7 @@
                                 </div>
 
                                 <div class="thirteen wide field">
-                                    <input type="date" name="date" id="date" value="">
+                                    <input type="date" name="date" value="">
                                 </div>
                             </div>
 
@@ -115,20 +78,10 @@
             animation  : 'flash',
             duration   : '1.5s'
         });
-        $('.ui.form')
-            .form({
-                fields: {
-                    date: {
-                        identifier: 'date',
-                        rules: [
-                            {
-                                type   : 'empty',
-                                prompt : 'لم تقوم باختيار التاريخ'
-                            }
-                        ]
-                    }
-                }
-            })
-        ;
+        $('.ui.form').form({
+            fields: {
+                date: {rules: [{type   : 'empty'}]}
+            }
+        });
     </script>
 @endsection

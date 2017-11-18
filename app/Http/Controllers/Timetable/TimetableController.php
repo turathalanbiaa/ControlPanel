@@ -6,6 +6,7 @@ use App\Model\Course\Course;
 use App\Model\Main\Authorization;
 use App\Model\Main\Login;
 use App\Model\Main\Map;
+use App\Model\Student\Student;
 use App\Model\Timetable\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -106,35 +107,79 @@ class TimetableController extends Controller
         return view("timetable.timetable_for_levels");
     }
 
-    public function addLessonToTimetable($level, $group)
-    {
-        $courses = Course::where("Level", "=", $level)->get();
 
-        return view("timetable.add_lesson_to_timetable")->with([
-            "level" => $level,
-            "group" => $group,
-            "courses" => $courses
-        ]);
+
+
+
+    public function convertDayToArabic($keyForDay)
+    {
+        switch ($keyForDay)
+        {
+            case "Sat" : return "السبت";   break;
+            case "Sun" : return "الاحد";    break;
+            case "Mon" : return "الاثنين";  break;
+            case "Tue" : return "الثلاثاء"; break;
+            case "Wed" : return "الاربعاء"; break;
+            case "Thu" : return "الخميس";  break;
+            case "Fri" : return "الجمعه";  break;
+        }
+
+        return "";
     }
 
-    public function addLessonValidation()
+
+
+    public function preAddLessons()
+    {
+        return view("timetable.pre_add_lessons");
+    }
+
+    public function preUpdateLessons()
+    {
+        return view("timetable.pre_update_lessons");
+    }
+
+    public function preUpdateWithAddLessons()
+    {
+        return view("timetable.pre_update_with_add_lessons");
+    }
+
+    public function operations()
+    {
+        $level = Input::get("level");
+        $group = Input::get("group");
+        $sendAction = Input::get("send");
+
+        switch ($sendAction)
+        {
+            case "pre-add-lessons" :
+                $courses = Course::where("level","=",Input::get("level"))->get();
+                return view("timetable.add_lessons")->with(["level" => $level, "group" => $group, "courses" => $courses]);
+                break;
+            case "pre-update-lessons" : return ""; break;
+            case "pre-update-with-add-lessons" : return ""; break;
+            default : return "";
+        }
+    }
+
+    public function addLesson()
     {
         $level = Input::get("level");
         $group = Input::get("group");
         $count = Input::get("count");
         $date = Input::get("date");
 
-        $lessons_ID = [];
+        $lessonsID = [];
 
         for ($i = 1; $i <= $count; $i++)
         {
             $item = Input::get("course-".$i);
 
             if(!is_null($item))
-                array_push($lessons_ID, $item);
+                array_push($lessonsID, $item);
         }
 
-        if(empty($lessons_ID))
+        if(empty($lessonsID))
         {
             return redirect("/timetable/add-lesson/$level/$group")->with("AddLessonMessage", "يرجى اختيار الدروس الي تريد اضافتها الى الجدول الدراسي.");
         }
@@ -152,21 +197,5 @@ class TimetableController extends Controller
         }
 
         return redirect("/timetable/add-lesson/$level/$group")->with("AddLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح.");
-    }
-
-    public function convertDayToArabic($keyForDay)
-    {
-        switch ($keyForDay)
-        {
-            case "Sat" : return "السبت";   break;
-            case "Sun" : return "الاحد";    break;
-            case "Mon" : return "الاثنين";  break;
-            case "Tue" : return "الثلاثاء"; break;
-            case "Wed" : return "الاربعاء"; break;
-            case "Thu" : return "الخميس";  break;
-            case "Fri" : return "الجمعه";  break;
-        }
-
-        return "";
     }
 }

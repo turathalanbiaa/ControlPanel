@@ -12,6 +12,16 @@ class Timetable extends Model
     protected $primaryKey = "ID";
     public $timestamps = false;
 
+    public function Lesson()
+    {
+        return $this->hasOne('App/Model/Lesson/Lesson', 'Lesson_ID', 'ID');
+    }
+
+
+
+
+
+
 
     public static function getTimetable($level, $group)
     {
@@ -71,8 +81,5 @@ class Timetable extends Model
         return $success;
     }
 
-    public function Lesson()
-    {
-        return $this->hasOne('App/Model/Lesson/Lesson', 'Lesson_ID', 'ID');
-    }
+
 }

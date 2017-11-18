@@ -10,6 +10,10 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
+        <div class="sixteen wide column">
+            <a href="/timetable/pre-add-lessons" class="ui orange button">pre-add</a>
+        </div>
+
 
         <div class="sixteen wide column">
             <div class="ui segment">

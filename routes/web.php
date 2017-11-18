@@ -69,6 +69,14 @@ Route::get('/lecturer/info-{id}', 'Lecturer\\LecturerController@info');
 Route::get('/lecturer/create', 'Lecturer\\LecturerController@create');
 /***********************************************************************************************************/
 Route::get('/timetable/show', 'Timetable\\TimetableController@show');
+
+Route::get('/timetable/pre-add-lessons', 'Timetable\\TimetableController@preAddLessons');
+Route::get('/timetable/pre-update-lessons', 'Timetable\\TimetableController@preUpdateLessons');
+Route::get('/timetable/pre-update-with-add-lessons', 'Timetable\\TimetableController@preUpdateWithAddLessons');
+Route::get('/timetable/operations', 'Timetable\\TimetableController@operations');
+Route::post('/timetable/add-lessons', 'Timetable\\TimetableController@addLesson');
+
+
 Route::post('/timetable/{text}/show', 'Timetable\\TimetableController@timetable');
 Route::post('/timetable/search', 'Timetable\\TimetableController@search');
 Route::get('/timetable/levels', 'Timetable\\TimetableController@timetableForEachLevels');

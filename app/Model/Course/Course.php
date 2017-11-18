@@ -17,6 +17,6 @@ class Course extends Model
 
     public function Lessons()
     {
-        return $this->hasMany('App\Model\Lesson\Lesson', 'Course_ID', 'ID');
+        return $this->hasMany('App\Model\Lesson\Lesson', 'Course_ID', 'ID')->orderBy("ID");
     }
 }
