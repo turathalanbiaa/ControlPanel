@@ -12,7 +12,7 @@
 
         <div class="sixteen wide column">
             <div class="ui segment">
-                <div class="ui grid">
+                <div class="ui centered grid">
                     <div class="eight wide column">
                         <div class="lg-space"></div>
                         <form class="ui big form" method="get" action="/timetable/operations">
@@ -37,6 +37,8 @@
                                 </div>
                             </div>
 
+                            <div class="ui hidden divider"></div>
+
                             <div class="inline fields">
                                 <div class="three wide field">
                                     <label>الشعبة</label>
@@ -45,7 +47,7 @@
                                     <div class="ui selection dropdown" style="width: 100%;">
                                         <input type="hidden" name="group">
                                         <i class="dropdown icon"></i>
-                                        <div class="default text">اختر المرحلة</div>
+                                        <div class="default text">اختر الشعبة</div>
                                         <div class="menu">
                                             <div class="item" data-value="شعبة أ">{{"شعبة أ"}}</div>
                                             <div class="item" data-value="شعبة ب">{{"شعبة ب"}}</div>
@@ -61,7 +63,7 @@
 
                             <div class="inline fields">
                                 <div class="sixteen wide field">
-                                    <button type="submit" class="ui big green button" name="send" value="pre-add-lessons" style="margin: auto;">ارسال</button>
+                                    <button type="submit" class="ui big green button" name="send" value="pre-add-lessons" style="margin: auto !important;">ارسال</button>
                                 </div>
                             </div>
                         </form>
@@ -76,10 +78,6 @@
 @section("script")
     <script>
         $('.ui.selection.dropdown').dropdown();
-        $('.success.message').transition({
-            animation  : 'flash',
-            duration   : '1.5s'
-        });
         $('.ui.form').form({
             fields: {
                 level: {rules: [{type   : 'empty'}]},

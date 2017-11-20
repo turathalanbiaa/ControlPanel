@@ -6,10 +6,10 @@ use App\Model\Course\Course;
 use App\Model\Main\Authorization;
 use App\Model\Main\Login;
 use App\Model\Main\Map;
-use App\Model\Student\Student;
 use App\Model\Timetable\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class TimetableController extends Controller
@@ -156,8 +156,21 @@ class TimetableController extends Controller
                 $courses = Course::where("level","=",Input::get("level"))->get();
                 return view("timetable.add_lessons")->with(["level" => $level, "group" => $group, "courses" => $courses]);
                 break;
-            case "pre-update-lessons" : return ""; break;
-            case "pre-update-with-add-lessons" : return ""; break;
+
+            case "pre-update-lessons" :
+                $date = Input::get("date");
+                $courses = Course::where("level","=",Input::get("level"))->get();
+
+                $lessonsInTimetable = DB::table('lesson')
+                    ->rightJoin('lesson_timetable', 'lesson.ID', '=', 'lesson_timetable.Lesson_ID')
+                    ->where("level",$level)
+                    ->where("group",$group)
+                    ->where("date",$date)
+                    ->get();
+
+                return view("timetable.update_lessons")->with(["level"=>$level, "group"=>$group, "date"=>$date, "courses"=>$courses, "lessonsInTimetable"=>$lessonsInTimetable]);
+                break;
+
             default : return "";
         }
     }
@@ -180,22 +193,56 @@ class TimetableController extends Controller
         }
 
         if(empty($lessonsID))
-        {
-            return redirect("/timetable/add-lesson/$level/$group")->with("AddLessonMessage", "يرجى اختيار الدروس الي تريد اضافتها الى الجدول الدراسي.");
-        }
+            return redirect("/timetable/operations?level=$level&group=$group&send=pre-add-lessons")->with("AddLessonMessage", "يرجى اختيار الدروس الي تريد اضافتها الى الجدول الدراسي لهذه المرحلة.");
 
-        foreach ($lessons_ID as $lesson_ID)
+        foreach ($lessonsID as $lessonID)
         {
             $timetable = new TimeTable;
-
-            $timetable->Lesson_ID = $lesson_ID;
+            $timetable->Lesson_ID = $lessonID;
             $timetable->Date = $date;
             $timetable->Level = $level;
             $timetable->Group = $group;
-
             $timetable->save();
         }
 
-        return redirect("/timetable/add-lesson/$level/$group")->with("AddLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح.");
+        return redirect("/timetable/operations?level=$level&group=$group&send=pre-add-lessons")->with("AddLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح لهذه المرحلة.");
+    }
+
+    public function updateLesson()
+    {
+        $level = Input::get("level");
+        $group = Input::get("group");
+        $count = Input::get("count");
+        $date = Input::get("date");
+
+        $lessonsID = [];
+
+        for ($i = 1; $i <= $count; $i++)
+        {
+            $item = Input::get("course-".$i);
+
+            if(!is_null($item))
+                array_push($lessonsID, $item);
+        }
+
+        $lessonsInTimetable = Timetable::where("level",$level)->where("group",$group)->where("Date",$date)->get();
+
+        foreach ($lessonsInTimetable as $lessonInTimetable)
+            $lessonInTimetable->delete();
+
+        if(empty($lessonsID))
+            return redirect("/timetable/operations?level=$level&group=$group&date=$date&send=pre-update-lessons")->with("UpdateLessonMessage", "يرجى اختيار الدروس الي تريد تعديلها في الجدول الدراسي لهذه المرحلة.");
+
+        foreach ($lessonsID as $lessonID)
+        {
+            $timetable = new TimeTable;
+            $timetable->Lesson_ID = $lessonID;
+            $timetable->Date = $date;
+            $timetable->Level = $level;
+            $timetable->Group = $group;
+            $timetable->save();
+        }
+
+        return redirect("/timetable/operations?level=$level&group=$group&date=$date&send=pre-update-lessons")->with("UpdateLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح لهذه المرحلة.");
     }
 }

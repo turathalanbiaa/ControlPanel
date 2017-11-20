@@ -1,7 +1,7 @@
 @extends("layout.main_layout")
 
 @section("title")
-    <title>اضافة الدروس الى الجدول الدراسي</title>
+    <title>تعديل الدروس الجدول الدراسي</title>
 @endsection
 
 @section("content")
@@ -10,10 +10,10 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
-        @if(session("AddLessonMessage"))
+        @if(session("UpdateLessonMessage"))
             <div class="sixteen wide column">
                 <div class="ui success large message">
-                    <h2 style="text-align: center;">{{session("AddLessonMessage")}}</h2>
+                    <h2 style="text-align: center;">{{session("UpdateLessonMessage")}}</h2>
                 </div>
             </div>
         @endif
@@ -22,21 +22,12 @@
             <div class="ui segment">
                 <div class="ui grid">
                     <div class="sixteen wide column">
-                        <form class="ui big form" method="post" action="/timetable/add-lessons">
+                        <form class="ui big form" method="post" action="/timetable/update-lessons">
                             {!! csrf_field() !!}
                             <input type="hidden" name="level" value="{{$level}}">
                             <input type="hidden" name="group" value="{{$group}}">
+                            <input type="hidden" name="date" value="{{$date}}">
                             <input type="hidden" name="count" value="{{count($courses)}}">
-
-                            <div class="inline fields">
-                                <div class="two wide field">
-                                    <label for="date">التاريخ :- </label>
-                                </div>
-
-                                <div class="fourteen wide field">
-                                    <input type="date" name="date" value="">
-                                </div>
-                            </div>
 
                             <?php $i = 1;?>
                             @foreach($courses as $course)
@@ -46,17 +37,32 @@
                                     </div>
 
                                     <div class="eleven wide field">
-                                        <div class="ui selection dropdown" tabindex="0" style="width: 100%;">
-                                            <input type="hidden" name="{{'course-' . $i}}" id="{{'course-' . $i}}">
+                                        <?php
+                                        $lessonSelectedID = null;
+                                        $lessonSelectedTitle = null;
+                                        foreach($lessonsInTimetable as $lesson)
+                                            if($course->ID == $lesson->Course_ID)
+                                            {
+                                                $lessonSelectedID = $lesson->Lesson_ID;
+                                                $lessonSelectedTitle = $lesson->Title;
+                                            }
+                                        ?>
+                                        <div class="ui selection dropdown" data-content="{{$course->Name}}" tabindex="0" style="width: 100%;">
+                                            <input type="hidden" name="{{'course-' . $i}}" id="{{'course-' . $i}}" value="@if(!is_null($lessonSelectedID)){{$lessonSelectedID}}@endif">
                                             <i class="dropdown icon"></i>
-                                            <div class="default text"> {{$course->Name}} </div>
+                                            @if(is_null($lessonSelectedID))
+                                                <div class="default text">{{$course->Name}}</div>
+                                            @else
+                                                <div class="text">{{$lessonSelectedTitle}}</div>
+                                            @endif
+
                                             <div class="menu transition hidden" tabindex="-1">
                                                 @foreach($course->Lessons as $lesson)
-                                                    <div class="item" data-value="{{$lesson->ID}}">{{$lesson->Title}}</div>
+                                                    <div class="item @if($lesson->ID == $lessonSelectedID){{"active selected"}}@endif" data-value="{{$lesson->ID}}">{{$lesson->Title}}</div>
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="ui red button" data-action="clear">مسح</div>
+                                        <div class="ui red button" data-action="clear">حذف</div>
                                     </div>
                                 </div>
                                 <?php $i++; ?>
@@ -92,6 +98,7 @@
         {
             var list = $(this).parent().find('.ui.selection.dropdown');
             list.dropdown('clear');
+            list.find("div.default.text").text(list.data("content"));
         });
     </script>
 @endsection
