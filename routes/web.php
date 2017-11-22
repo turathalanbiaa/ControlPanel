@@ -68,18 +68,12 @@ Route::get('/lecturer/info-{id}', 'Lecturer\\LecturerController@info');
 
 Route::get('/lecturer/create', 'Lecturer\\LecturerController@create');
 /***********************************************************************************************************/
-Route::get('/timetable/show', 'Timetable\\TimetableController@show');
-
+Route::get('/timetable', 'Timetable\\TimetableController@timetable');
 Route::get('/timetable/pre-add-lessons', 'Timetable\\TimetableController@preAddLessons');
 Route::get('/timetable/pre-update-lessons', 'Timetable\\TimetableController@preUpdateLessons');
 Route::get('/timetable/operations', 'Timetable\\TimetableController@operations');
 Route::post('/timetable/add-lessons', 'Timetable\\TimetableController@addLesson');
 Route::post('/timetable/update-lessons', 'Timetable\\TimetableController@updateLesson');
-
-
-Route::post('/timetable/{text}/show', 'Timetable\\TimetableController@timetable');
 Route::post('/timetable/search', 'Timetable\\TimetableController@search');
-Route::get('/timetable/levels', 'Timetable\\TimetableController@timetableForEachLevels');
-Route::get('/timetable/add-lesson/{text}/{group}', 'Timetable\\TimetableController@addLessonToTimetable');
-Route::post('/timetable/add-lesson-validate', 'Timetable\\TimetableController@addLessonValidation');
+Route::get('/timetable/show-timetable-for-levels', 'Timetable\\TimetableController@timetableForEachLevels');
 /***********************************************************************************************************/

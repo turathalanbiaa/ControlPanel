@@ -21,6 +21,11 @@ class EventLog extends Model
         "ACTIVE ACCOUNT BY SET 'VerifiedEmail=1'"=> "ACTIVE ACCOUNT BY SET 'VerifiedEmail=1'"
     );
 
+    const TIMETABLE_EVENTS_LOG = array(
+        "ADD LESSONS TO TIMETABLE"=> "ADD LESSONS TO TIMETABLE",
+        "UPDATE LESSONS ON TIMETABLE"=> "UPDATE LESSONS ON TIMETABLE"
+    );
+
 
     const LECTURER_EVENTS_LOG = array(
         "ADD LECTURER"=> "ADD LECTURER",

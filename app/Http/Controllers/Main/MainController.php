@@ -92,7 +92,7 @@ class MainController extends Controller
                 return redirect('/courses/show');
 
             case Map::MAPS['TimeTable']:
-                return redirect("/timetable/show");
+                return redirect("/timetable");
 
             case Map::MAPS['Announcement']:
                 return "this Announcement page";

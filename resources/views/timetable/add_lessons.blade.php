@@ -10,6 +10,15 @@
             @include("layout.welcome_to_control_panel")
         </div>
 
+        <div class="sixteen wide column">
+            <div class="ui fluid black large four buttons">
+                <a href="/home"  class="ui button">الرئيسية</a>
+                <a href="/timetable" class="ui button">بحث دروس</a>
+                <a href="/timetable/pre-update-lessons" class="ui button">تعديل دروس</a>
+                <a href="/timetable/show-timetable-for-levels" class="ui button">عرض الجداول الدراسية</a>
+            </div>
+        </div>
+
         @if(session("AddLessonMessage"))
             <div class="sixteen wide column">
                 <div class="ui success large message">

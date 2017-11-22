@@ -17,12 +17,6 @@ class Timetable extends Model
         return $this->hasOne('App/Model/Lesson/Lesson', 'Lesson_ID', 'ID');
     }
 
-
-
-
-
-
-
     public static function getTimetable($level, $group)
     {
         return DB::table("lesson_timetable")

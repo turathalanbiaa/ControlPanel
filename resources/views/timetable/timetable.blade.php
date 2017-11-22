@@ -11,212 +11,118 @@
         </div>
 
         <div class="sixteen wide column">
-            <div class="ui four column grid">
-                <div class="column">
-                    <a href="/home" class="ui fluid orange big button">الرئيسية</a>
-                </div>
-
-                <div class="column">
-                    <a href="/timetable/levels" class="ui fluid orange big button">عرض الجداول الدراسية لكل مرحلة</a>
-                </div>
-
-                <div class="column">
-                    <a href="/timetable/add-lesson/{{$level}}/{{$group}}" class="ui fluid orange big button">اضافة درس الى الجدول الدراسي</a>
-                </div>
+            <div class="ui fluid black large four buttons">
+                <a href="/home"  class="ui button">الرئيسية</a>
+                <a href="/timetable/pre-add-lessons" class="ui button">اضافة دروس</a>
+                <a href="/timetable/pre-update-lessons" class="ui button">تعديل دروس</a>
+                <a href="/timetable/show-timetable-for-levels" class="ui button">عرض الجداول الدراسية</a>
             </div>
         </div>
 
-        @if($state == 1)
-        <div class="sixteen wide column">
+        <div  class="sixteen wide column">
             <div class="ui segment">
-                <h3 class="ui center aligned green dividing large header">
-                    <span>جدول الدراسي للمرحلة </span>
-                    <span>{{\App\Model\Student\Level::getLevelName($level)}}</span>
-                    <span> - </span>
-                    <span>{{$group}}</span>
-                </h3>
+                <h3 class="ui dividing center aligned green header">البحث عن جميع الدروس ضمن الفترة المحددة</h3>
+                <form class="ui big form" method="post" action="/timetable/search">
+                    {!! csrf_field() !!}
 
-                <div class="ui inverted segment">
-                    <form class="ui big form" method="post" action="/timetable/search">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="level" value="{{$level}}">
-                        <input type="hidden" name="group" value="{{$group}}">
-
-                        <div class="inline fields">
-                            <div class="two wide field">
-                                <label for="date" style="color:white;">أختر تأريخ اليوم</label>
-                            </div>
-                            <div class="six wide field">
-                                <input type="date" name="date" id="date">
-                            </div>
-                            <div class="two wide field">
-                                <button type="submit" class="ui fluid big teal button">بحث</button>
+                    <div class="fields">
+                        <div class="four wide field">
+                            <label for="level">المرحلة</label>
+                            <div class="ui selection dropdown" style="width: 100%;">
+                                <input type="hidden" name="level" id="level">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">اختر المرحلة</div>
+                                <div class="menu">
+                                    <div class="item" data-value="{{\App\Model\Student\Level::BEGINNER}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::BEGINNER)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::FIRST_LEVEL_INTRO)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SECOND_LEVEL_INTRO)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::THIRD_LEVEL_INTRO)}}</div>
+                                </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+
+                        <div class="four wide field">
+                            <label for="group">الشعبة</label>
+                            <div class="ui selection dropdown" style="width: 100%;">
+                                <input type="hidden" name="group" id="group">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">اختر الشعبة</div>
+                                <div class="menu">
+                                    <div class="item" data-value="شعبة أ">{{"شعبة أ"}}</div>
+                                    <div class="item" data-value="شعبة ب">{{"شعبة ب"}}</div>
+                                    <div class="item" data-value="شعبة ج">{{"شعبة ج"}}</div>
+                                    <div class="item" data-value="شعبة هـ">{{"شعبة هـ"}}</div>
+                                    <div class="item" data-value="شعبة و">{{"شعبة و"}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="three wide field">
+                            <label for="from-date">من تأريخ</label>
+                            <input type="date" name="fromDate" id="from-date">
+                        </div>
+
+                        <div class="three wide field">
+                            <label for="to-date">الى تأريخ</label>
+                            <input type="date" name="toDate" id="to-date">
+                        </div>
+
+                        <div class="two wide field">
+                            <label></label><br>
+                            <button type="submit" class="ui fluid big green button"  style="margin: auto !important;">بحث</button>
+                        </div>
+                    </div>
+                </form>
 
                 <div class="ui hidden divider"></div>
 
-                <div class="ui segment">
-                    <div class="ui grid">
-                        <div class="sixteen wide column">
-                            <h3 class="ui dividing right aligned green header">
-                                <span>دروس اليوم </span>
-                                <span>{{'(' . $timetableForToday["Day"] . ')'}}</span>
-                                <span>المصادف</span>
-                                <span>{{$timetableForToday["Date"]}}</span>
-                            </h3>
-                        </div>
+                @if(isset($results))
+                    <div class="ui dividing header">نتائج البحث</div>
+                    @if(count($results) > 0)
+                        <table class="ui center aligned celled large table">
+                            <thead>
+                            <tr>
+                                <th>اليوم</th>
+                                <th>التاريخ</th>
+                                <th>عدد الدروس</th>
+                                <th>خيارات</th>
+                            </tr>
+                            </thead>
 
-                        <?php $timetableToday = $timetableForToday["Timetable"]; ?>
-                        @if(count($timetableToday) > 0)
-                            @foreach($timetableToday as $item)
-                                <div class="four wide column">
-                                    <button class="ui fluid orange big button">{{$item->Title}}</button>
-                                </div>
+                            <tbody>
+                            @foreach($results as $result)
+                                <tr>
+                                    <td>{{\App\Model\Main\Date::getArabicDay($result->Date)}}</td>
+                                    <td>{{$result->Date}}</td>
+                                    <td>{{$result->CountOfLessons}}</td>
+                                    <td><a href="/timetable/operations?level={{$level}}&group={{$group}}&date={{$result->Date}}&send=pre-update-lessons" class="ui green button">عرض</a></td>
+                                </tr>
                             @endforeach
-                        @else
-                            <div class="sixteen wide column">
-                                <div class="ui info big message">
-                                    <div class="md-space"></div>
-                                    <h3 class="ui center aligned header">لاتوجد دروس لهذا اليوم</h3>
-                                    <div class="md-space"></div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="ui hidden divider"></div>
-
-                <div class="ui segment">
-                    <div class="ui grid">
-                        <div class="sixteen wide column">
-                            <h3 class="ui dividing right aligned green header">
-                                <span>دروس يوم غد </span>
-                                <span>{{'(' . $timetableForTomorrow["Day"] . ')'}}</span>
-                                <span>المصادف</span>
-                                <span>{{$timetableForTomorrow["Date"]}}</span>
-                            </h3>
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="ui massive message">
+                            <div class="lg-space"></div>
+                            <h2 class="ui center aligned header">لاتوجد دروس خلال هذه الفترة الزمنية</h2>
+                            <div class="lg-space"></div>
                         </div>
-
-                        <?php $timetableTomorrow = $timetableForTomorrow["Timetable"]; ?>
-                        @if(count($timetableTomorrow) > 0)
-                            @foreach($timetableTomorrow as $item)
-                                <div class="four wide column">
-                                    <button class="ui fluid orange big button">{{$item->Title}}</button>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="sixteen wide column">
-                                <div class="ui info big message">
-                                    <div class="md-space"></div>
-                                    <h3 class="ui center aligned header">لاتوجد دروس لهذا اليوم</h3>
-                                    <div class="md-space"></div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="ui hidden divider"></div>
-
-                <div class="ui segment">
-                    <div class="ui grid">
-                        <div class="sixteen wide column">
-                            <h3 class="ui dividing right aligned green header">
-                                <span>دروس يوم امس </span>
-                                <span>{{'(' . $timetableForYesterday["Day"] . ')'}}</span>
-                                <span>المصادف</span>
-                                <span>{{$timetableForYesterday["Date"]}}</span>
-                            </h3>
-                        </div>
-
-                        <?php $timetableYesterday = $timetableForYesterday["Timetable"]; ?>
-                        @if(count($timetableYesterday) > 0)
-                            @foreach($timetableYesterday as $item)
-                                <div class="four wide column">
-                                    <button class="ui fluid orange big button">{{$item->Title}}</button>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="sixteen wide column">
-                                <div class="ui info big message">
-                                    <div class="md-space"></div>
-                                    <h3 class="ui center aligned header">لاتوجد دروس لهذا اليوم</h3>
-                                    <div class="md-space"></div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+                    @endif
+                @endif
             </div>
         </div>
-        @endif
-
-        @if($state == 2)
-            <div class="sixteen wide column">
-                <div class="ui segment">
-                    <h3 class="ui center aligned green dividing large header">
-                        <span>جدول الدراسي للمرحلة </span>
-                        <span>{{\App\Model\Student\Level::getLevelName($level)}}</span>
-                        <span> - </span>
-                        <span>{{$group}}</span>
-                    </h3>
-
-                    <div class="ui inverted segment">
-                        <form class="ui big form" method="post" action="/timetable/search">
-                            {!! csrf_field() !!}
-                            <input type="hidden" name="level" value="{{$level}}">
-                            <input type="hidden" name="group" value="{{$group}}">
-
-                            <div class="inline fields">
-                                <div class="two wide field">
-                                    <label for="date" style="color:white;">أختر تأريخ اليوم</label>
-                                </div>
-                                <div class="six wide field">
-                                    <input type="date" name="date" id="date">
-                                </div>
-                                <div class="two wide field">
-                                    <button type="submit" class="ui fluid big teal button">بحث</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="ui hidden divider"></div>
-
-                    <div class="ui segment">
-                        <div class="ui grid">
-                            <div class="sixteen wide column">
-                                <h3 class="ui dividing right aligned green header">
-                                    <span>دروس اليوم </span>
-                                    <span>{{'(' . $day . ')'}}</span>
-                                    <span>المصادف</span>
-                                    <span>{{$date}}</span>
-                                </h3>
-                            </div>
-
-                            @if(count($timetable) > 0)
-                                @foreach($timetable as $item)
-                                    <div class="four wide column">
-                                        <button class="ui fluid orange big button">{{$item->Title}}</button>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="sixteen wide column">
-                                    <div class="ui info big message">
-                                        <div class="md-space"></div>
-                                        <h3 class="ui center aligned header">لاتوجد دروس لهذا اليوم</h3>
-                                        <div class="md-space"></div>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
+@endsection
+
+@section("script")
+    <script>
+        $('.ui.selection.dropdown').dropdown();
+        $('.ui.form').form({
+            fields: {
+                level: {rules: [{type   : 'empty'}]},
+                group: {rules: [{type   : 'empty'}]},
+                fromDate: {rules: [{type   : 'empty'}]},
+                toDate: {rules: [{type   : 'empty'}]}
+            }
+        });
+    </script>
 @endsection

@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Timetable;
 
 use App\Model\Course\Course;
+use App\Model\EventLog\EventLog;
 use App\Model\Main\Authorization;
 use App\Model\Main\Login;
 use App\Model\Main\Map;
+use App\Model\Student\Level;
 use App\Model\Timetable\Timetable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class TimetableController extends Controller
 {
-    public function show()
+    public function timetable()
     {
         if(!Login::isLogin())
             return redirect("/login");
@@ -22,112 +23,19 @@ class TimetableController extends Controller
         if (!Authorization::authorize(Map::MAPS["TimeTable"]))
             return view("message.warning_message");
 
-        $timetableMap = Timetable::getTimetableMap();
+        return view("timetable.timetable");
 
-        return view("timetable.timetable_show")->with(["timetableMap" => $timetableMap]);
     }
 
-    public function timetable()
+    public function search()
     {
-        $state = 1;
         $level = Input::get("level");
         $group = Input::get("group");
-
-        $today = date("Y-m-d");
-        $d = strtotime($today);
-        $keyForDay = date("D", $d);
-        $dayForToday = $this->convertDayToArabic($keyForDay);
-        $timetableForToday = Timetable::getTimeTableForDate($level, $group, $today);
-
-        $d=strtotime("tomorrow");
-        $tomorrow  = date("Y-m-d", $d);
-        $keyForDay = date("D", $d);
-        $dayForTomorrow = $this->convertDayToArabic($keyForDay);
-        $timetableForTomorrow = Timetable::getTimeTableForDate($level, $group, $tomorrow);
-
-        $d=strtotime("yesterday");
-        $yesterday  = date("Y-m-d", $d);
-        $keyForDay = date("D", $d);
-        $dayForYesterday = $this->convertDayToArabic($keyForDay);
-        $timetableForYesterday = Timetable::getTimeTableForDate($level, $group, $yesterday);
-
-
-        return view("timetable.timetable")->with([
-            "state" => $state,
-            "level" => $level,
-            "group" => $group,
-            "timetableForToday" => [
-                "Date" => $today,
-                "Day" => $dayForToday,
-                "Timetable" => $timetableForToday
-            ],
-            "timetableForTomorrow" => [
-                "Date" => $tomorrow,
-                "Day" => $dayForTomorrow,
-                "Timetable" => $timetableForTomorrow
-            ],
-            "timetableForYesterday" => [
-                "Date" => $yesterday,
-                "Day" => $dayForYesterday,
-                "Timetable" => $timetableForYesterday
-            ]
-        ]);
+        $fromDate = Input::get("fromDate");
+        $toDate = Input::get("toDate");
+        $results =  DB::select('select count(*) as CountOfLessons,`Date` from `lesson_timetable` where `Level` = ? AND `Group` = ? AND `Date` >= ? AND `Date` < ? GROUP BY `Date`', [$level, $group, $fromDate, $toDate]);
+        return view("timetable.timetable")->with(["results"=>$results, "level"=>$level, "group"=>$group]);
     }
-
-    public function search(Request $request)
-    {
-        $state = 2;
-        $level = Input::get('level');
-        $group = Input::get('group');
-        $date = Input::get("date");
-
-        $this->validate($request, [
-            'date' => 'required'
-        ], [
-            'date.required' => 'لا يوجد تاريخ مختار.'
-        ]);
-
-        $d = strtotime($date);
-        $keyForDay = date("D", $d);
-        $day = $this->convertDayToArabic($keyForDay);
-        $timetable = Timetable::getTimeTableForDate($level, $group, $date);
-
-        return view("timetable.timetable")->with([
-            "state" => $state,
-            "level" => $level,
-            "group" => $group,
-            "date" => $date,
-            "day" => $day,
-            "timetable" => $timetable
-        ]);
-    }
-
-    public function timetableForEachLevels()
-    {
-        return view("timetable.timetable_for_levels");
-    }
-
-
-
-
-
-    public function convertDayToArabic($keyForDay)
-    {
-        switch ($keyForDay)
-        {
-            case "Sat" : return "السبت";   break;
-            case "Sun" : return "الاحد";    break;
-            case "Mon" : return "الاثنين";  break;
-            case "Tue" : return "الثلاثاء"; break;
-            case "Wed" : return "الاربعاء"; break;
-            case "Thu" : return "الخميس";  break;
-            case "Fri" : return "الجمعه";  break;
-        }
-
-        return "";
-    }
-
-
 
     public function preAddLessons()
     {
@@ -137,11 +45,6 @@ class TimetableController extends Controller
     public function preUpdateLessons()
     {
         return view("timetable.pre_update_lessons");
-    }
-
-    public function preUpdateWithAddLessons()
-    {
-        return view("timetable.pre_update_with_add_lessons");
     }
 
     public function operations()
@@ -205,6 +108,8 @@ class TimetableController extends Controller
             $timetable->save();
         }
 
+        $description = Level::getLevelName($level) . " - " . $group;
+        EventLog::addEvent(EventLog::TIMETABLE_EVENTS_LOG["ADD LESSONS TO TIMETABLE"], $description);
         return redirect("/timetable/operations?level=$level&group=$group&send=pre-add-lessons")->with("AddLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح لهذه المرحلة.");
     }
 
@@ -243,6 +148,13 @@ class TimetableController extends Controller
             $timetable->save();
         }
 
+        $description = Level::getLevelName($level) . " - " . $group;
+        EventLog::addEvent(EventLog::TIMETABLE_EVENTS_LOG["UPDATE LESSONS ON TIMETABLE"], $description);
         return redirect("/timetable/operations?level=$level&group=$group&date=$date&send=pre-update-lessons")->with("UpdateLessonMessage", "تمت عملية اضافة الدروس الى الجدول الدراسي بنجاح لهذه المرحلة.");
+    }
+
+    public function timetableForEachLevels()
+    {
+        return view("timetable.timetable_for_levels");
     }
 }
