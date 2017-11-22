@@ -46,7 +46,7 @@
             }
         </style>
         <div class="sixteen wide column">
-            <a class="ui red tag label">Upcoming</a>
+            <a class="ui red tag label">{{getcwd()}}</a>
         </div>
 
         <div class="sixteen wide column">
