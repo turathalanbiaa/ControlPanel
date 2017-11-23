@@ -1,7 +1,3 @@
-/**
- * Created by Emad on 10/4/2017.
- */
-
 function snackbar(text , timeout , cssClass)
 {
     $("#my-custom-snackbar").remove();

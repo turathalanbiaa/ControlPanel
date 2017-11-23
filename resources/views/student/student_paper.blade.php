@@ -21,12 +21,14 @@
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["1"]))
-                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["1"]->Image}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["1"]->Image}}" style="height:400px;">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
+                                <div class="sm-space"></div>
                                 <h3 style="padding: 8px 0;">لم يقم الطالب برفع هذا المستمسك</h3>
+                                <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -60,12 +62,14 @@
                         <div class="ui top attached header">التزكية الدينية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["2"]))
-                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["2"]->Image}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["2"]->Image}}" style="height:400px;">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
+                                <div class="sm-space"></div>
                                 <h3 style="padding: 8px 0;">لم يقم الطالب برفع هذا المستمسك</h3>
+                                <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -99,12 +103,14 @@
                         <div class="ui top attached header">الشهادة العلمية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["3"]))
-                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["3"]->Image}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["3"]->Image}}" style="height:400px;">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
+                                <div class="sm-space"></div>
                                 <h3 style="padding: 8px 0;">لم يقم الطالب برفع هذا المستمسك</h3>
+                                <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
