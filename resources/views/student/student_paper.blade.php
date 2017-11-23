@@ -14,6 +14,9 @@
             <div class="ui segment">
                 <h3 class="ui dividing right aligned green header"><span>مستمسكات الطالب :- </span> <span>{{$student->Name}}</span></h3>
                 <div class="ui center aligned three column grid">
+                    <div class="ui dimmer" id="dimmer">
+                        <div class="ui text loader">جاري التحميل...</div>
+                    </div>
                     <div class="column">
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
@@ -158,6 +161,7 @@
         $("button[data-action='accept']").click(function ()
         {
             var paperId = $(this).data("paper-id");
+            $('#dimmer').addClass("active");
 
             $.ajax({
                 type: "GET",
@@ -172,19 +176,19 @@
 
                     if (result["success"] == false)
                     {
-                        snackbar("لم تتم عملية قبول المستمسك , يرجى اعادة المحاولة." , 3000 , "warning");
+                        snackbar("لم تتم عملية قبول المستمسك , يرجى اعادة المحاولة." , 3000 , "error");
                     }
 
                     if (result["success"] == true)
                     {
-                        snackbar("تمت عملية قبول المستمسك بنجاح" , 3000 , "warning");
+                        snackbar("تمت عملية قبول المستمسك بنجاح" , 3000 , "success");
                     }
                 },
                 error: function() {
-                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "warning");
+                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "error");
                 } ,
                 complete : function() {
-                    dimmer.removeClass("active");
+                    $('#dimmer').removeClass("active");
                 }
             });
         });
@@ -192,6 +196,7 @@
         $("button[data-action='reject']").click(function ()
         {
             var paperId = $(this).data("paper-id");
+            $('#dimmer').addClass("active");
 
             $.ajax({
                 type: "GET",
@@ -206,19 +211,19 @@
 
                     if (result["success"] == false)
                     {
-                        snackbar("لم تتم عملية رفض المستمسك , يرجى اعادة المحاولة." , 3000 , "warning");
+                        snackbar("لم تتم عملية رفض المستمسك , يرجى اعادة المحاولة." , 3000 , "error");
                     }
 
                     if (result["success"] == true)
                     {
-                        snackbar("تمت عملية رفض المستمسك بنجاح" , 3000 , "warning");
+                        snackbar("تمت عملية رفض المستمسك بنجاح" , 3000 , "success");
                     }
                 },
                 error: function() {
-                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "warning");
+                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "error");
                 } ,
                 complete : function() {
-                    dimmer.removeClass("active");
+                    $('#dimmer').removeClass("active");
                 }
             });
         });

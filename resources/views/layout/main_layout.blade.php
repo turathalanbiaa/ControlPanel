@@ -15,7 +15,7 @@
     <!-- Script -->
     <script src="{{asset("assets/scripts/jquery.min.js")}}"></script>
     <script src="{{asset("assets/scripts/semantic.min.js")}}"></script>
-    <script src="{{asset("assets/scripts/snackber.js")}}"></script>
+    <script src="{{asset("assets/scripts/snackbar.js")}}"></script>
 
 </head>
 <body>

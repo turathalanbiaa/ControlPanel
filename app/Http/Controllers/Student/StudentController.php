@@ -453,9 +453,6 @@ class StudentController extends Controller
         return redirect("/student/info-$student->ID")->with('ConvertListenerToStudentMessage', "تم تحويل الحساب من مستمع الى طالب : ".$student->Name);
     }
 
-
-
-
     public function paper()
     {
         $id = Input::get("id");
@@ -477,6 +474,8 @@ class StudentController extends Controller
             }
         }
 
+        $description = $student->ID .":-" .$student->Name;
+        EventLog::addEvent(EventLog::STUDENT_PAPER_LOG["SHOW PAPERS"], $description);
         return view("student.student_paper")->with(["student"=>$student, "papers"=>$papers]);
     }
 
@@ -490,9 +489,17 @@ class StudentController extends Controller
 
         $paper->State = 1;
         $success = $paper->save();
+
         if (!$success)
             return ["success"=> false];
 
+        $student = Student::find($paper->Student_ID);
+
+        if (is_null($student))
+            return ["success"=> null];
+
+        $description = $student->ID .":-".$student->Name."\n".$this->getPaperName($paper->Type);
+        EventLog::addEvent(EventLog::STUDENT_PAPER_LOG["ACCEPT PAPER"], $description);
         return ["success"=> true];
     }
 
@@ -509,7 +516,25 @@ class StudentController extends Controller
         if (!$success)
             return ["success"=> false];
 
+        $student = Student::find($paper->Student_ID);
+
+        if (is_null($student))
+            return ["success"=> null];
+
+        $description = $student->ID .":-".$student->Name."\n".$this->getPaperName($paper->Type);
+        EventLog::addEvent(EventLog::STUDENT_PAPER_LOG["REJECT PAPER"], $description);
         return ["success"=> true];
+    }
+
+    public function getPaperName($paperType)
+    {
+        switch ($paperType)
+        {
+            case 1: return "الهوية الشخصية"; break;
+            case 2: return "التزكية الدينية"; break;
+            case 3: return "الشهادة العلمية"; break;
+        }
+        return "";
     }
 }
 

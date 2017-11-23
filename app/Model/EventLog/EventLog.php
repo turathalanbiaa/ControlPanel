@@ -21,6 +21,12 @@ class EventLog extends Model
         "ACTIVE ACCOUNT BY SET 'VerifiedEmail=1'"=> "ACTIVE ACCOUNT BY SET 'VerifiedEmail=1'"
     );
 
+    const STUDENT_PAPER_LOG = array(
+        "SHOW PAPERS" => "SHOW PAPERS",
+        "ACCEPT PAPER" => "ACCEPT PAPER",
+        "REJECT PAPER" => "REJECT PAPER"
+    );
+
     const TIMETABLE_EVENTS_LOG = array(
         "ADD LESSONS TO TIMETABLE"=> "ADD LESSONS TO TIMETABLE",
         "UPDATE LESSONS ON TIMETABLE"=> "UPDATE LESSONS ON TIMETABLE"
@@ -32,7 +38,6 @@ class EventLog extends Model
         "DELETE LECTURER"=> "DELETE LECTURER",
         "UPDATE LECTURER"=> "UPDATE LECTURER"
     );
-
 
     public static function addEvent($event, $description)
     {
