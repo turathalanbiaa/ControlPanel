@@ -7,6 +7,7 @@ use App\Model\Main\Authorization;
 use App\Model\Main\Login;
 use App\Model\Main\Map;
 use App\Model\Student\Student;
+use App\Model\Student\StudentPaper;
 use App\Model\Student\StudentType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -477,6 +478,38 @@ class StudentController extends Controller
         }
 
         return view("student.student_paper")->with(["student"=>$student, "papers"=>$papers]);
+    }
+
+    public function acceptPaper()
+    {
+        $id  = Input::get("paperId");
+        $paper = StudentPaper::find($id);
+
+        if (is_null($paper))
+            return ["success"=> null];
+
+        $paper->State = 1;
+        $success = $paper->save();
+        if (!$success)
+            return ["success"=> false];
+
+        return ["success"=> true];
+    }
+
+    public function rejectPaper()
+    {
+        $id  = Input::get("paperId");
+        $paper = StudentPaper::find($id);
+
+        if (is_null($paper))
+            return ["success"=> null];
+
+        $paper->State = 2;
+        $success = $paper->save();
+        if (!$success)
+            return ["success"=> false];
+
+        return ["success"=> true];
     }
 }
 

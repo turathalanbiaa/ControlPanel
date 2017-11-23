@@ -40,6 +40,8 @@ Route::post('/student/convert-type', 'Student\\StudentController@convertStudentT
 Route::get('/student/convert-listener-to-student', 'Student\\StudentController@convertListenerToStudent');
 Route::post('/student/convert-listener-to-student/Validation', 'Student\\StudentController@convertListenerToStudentValidation');
 Route::get('/student/paper','Student\\StudentController@paper');
+Route::get('/student/paper/accept','Student\\StudentController@acceptPaper');
+Route::get('/student/paper/reject','Student\\StudentController@rejectPaper');
 /***********************************************************************************************************/
 Route::get('/courses/show', 'Course\\CourseController@showAll');
 Route::post('/courses/search', 'Course\\CourseController@search');

@@ -23,34 +23,6 @@
             @endif
         </div>
 
-        <style>
-            .ui.tag.label, .ui.tag.labels .label
-            {
-                margin-right: 1em;
-                margin-left: 0;
-                border-radius: .28571429rem 0  0 .28571429rem !important;
-            }
-
-            .ui.tag.label:before, .ui.tag.labels .label:before
-            {
-                left: 100%;
-                right: auto;
-                -webkit-transform: translateY(-50%) translateX(-50%) rotate(-45deg);
-                transform: translateY(-50%) translateX(-50%) rotate(-45deg);
-            }
-
-            .ui.tag.label:after, .ui.tag.labels .label:after
-            {
-                left: auto;
-                right: -.25em;
-            }
-        </style>
-        <div class="sixteen wide column">
-            <a class="ui red tag label">emad</a>
-            <img class="ui medium image" alt="eifi" src="/home/turathalanbiaa/public_html/storage/student/paper/05bOj91USuD6Aswq2pvEgVMkX4ymz7ANnyOuwgwUSFBKN6uAi1AXstfGlrgMnUEL2QLQ4c4L5RD2cfZxZQZ2LubhEQZlujDLXPGMlvlCbb4v6fQXarm9zYToE1F2Cpgz">
-            <img class="ui small image" src="/images/wireframe/image.png">
-        </div>
-
         <div class="sixteen wide column">
             <div class="ui right aligned four column grid">
                 <div class="column">

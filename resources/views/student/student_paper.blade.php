@@ -18,7 +18,7 @@
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["1"]))
-                                <img class="ui fluid image" src="{{asset("/assets/images/Courses.jpg")}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["1"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -38,16 +38,16 @@
                                     </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button @if(empty($papers['1'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted green button @if(empty($papers['1'])) {{"disabled"}} @endif"
                                     @if(!empty($papers['1'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["1"]->ID}} @endif>
                                         <span>قبول</span>
-                                    </div>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button @if(empty($papers['1'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted blue button @if(empty($papers['1'])) {{"disabled"}} @endif"
                                     @if(!empty($papers['1'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["1"]->ID}} @endif>
                                         <span>رفض</span>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                         <div class="ui top attached header">التزكية الدينية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["2"]))
-                                <img class="ui fluid image" src="{{asset("/assets/images/Courses.jpg")}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["2"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -77,16 +77,16 @@
                                     </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button @if(empty($papers['2'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted green button @if(empty($papers['2'])) {{"disabled"}} @endif"
                                         @if(!empty($papers['2'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["2"]->ID}} @endif>
                                         <span>قبول</span>
-                                    </div>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button @if(empty($papers['2'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted blue button @if(empty($papers['2'])) {{"disabled"}} @endif"
                                         @if(!empty($papers['2'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["2"]->ID}} @endif>
                                         <span>رفض</span>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                         <div class="ui top attached header">الشهادة العلمية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["3"]))
-                                <img class="ui fluid image" src="{{asset("/assets/images/Courses.jpg")}}">
+                                <img class="ui fluid image" src="http://turathalanbiaa.com/storage/student/paper/{{$papers["3"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -116,16 +116,16 @@
                                     </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted green button @if(empty($papers['3'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted green button @if(empty($papers['3'])) {{"disabled"}} @endif"
                                     @if(!empty($papers['3'])) {{"data-action=accept"}} {{"data-paper-id=" . $papers["3"]->ID}} @endif>
                                         <span>قبول</span>
-                                    </div>
+                                    </button>
                                 </div>
                                 <div class="column">
-                                    <div class="ui fluid inverted blue button @if(empty($papers['3'])) {{"disabled"}} @endif"
+                                    <button class="ui fluid inverted blue button @if(empty($papers['3'])) {{"disabled"}} @endif"
                                     @if(!empty($papers['3'])) {{"data-action=reject"}} {{"data-paper-id=" . $papers["3"]->ID}} @endif>
                                         <span>رفض</span>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                             </div>
@@ -153,6 +153,74 @@
             var src = image.attr("src");
             $('.ui.modal').find('.ui.fluid.image').attr("src",src);
             $('.ui.modal').modal("show");
+        });
+
+        $("button[data-action='accept']").click(function ()
+        {
+            var paperId = $(this).data("paper-id");
+
+            $.ajax({
+                type: "GET",
+                url: '/student/paper/accept',
+                data: {paperId: paperId},
+                datatype: 'json',
+                success: function(result) {
+                    if (result["success"] == null)
+                    {
+                        snackbar("لاتوجد هذه المستمسكات !!!، اعد المحاولة مرة اخرى." , 3000 , "warning");
+                    }
+
+                    if (result["success"] == false)
+                    {
+                        snackbar("لم تتم عملية قبول المستمسك , يرجى اعادة المحاولة." , 3000 , "warning");
+                    }
+
+                    if (result["success"] == true)
+                    {
+                        snackbar("تمت عملية قبول المستمسك بنجاح" , 3000 , "warning");
+                    }
+                },
+                error: function() {
+                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "warning");
+                } ,
+                complete : function() {
+                    dimmer.removeClass("active");
+                }
+            });
+        });
+
+        $("button[data-action='reject']").click(function ()
+        {
+            var paperId = $(this).data("paper-id");
+
+            $.ajax({
+                type: "GET",
+                url: '/student/paper/reject',
+                data: {paperId: paperId},
+                datatype: 'json',
+                success: function(result) {
+                    if (result["success"] == null)
+                    {
+                        snackbar("لاتوجد هذه المستمسكات !!!، اعد المحاولة مرة اخرى." , 3000 , "warning");
+                    }
+
+                    if (result["success"] == false)
+                    {
+                        snackbar("لم تتم عملية رفض المستمسك , يرجى اعادة المحاولة." , 3000 , "warning");
+                    }
+
+                    if (result["success"] == true)
+                    {
+                        snackbar("تمت عملية رفض المستمسك بنجاح" , 3000 , "warning");
+                    }
+                },
+                error: function() {
+                    snackbar("تحقق من الاتصال بالانترنت" , 3000 , "warning");
+                } ,
+                complete : function() {
+                    dimmer.removeClass("active");
+                }
+            });
         });
     </script>
 @endsection
