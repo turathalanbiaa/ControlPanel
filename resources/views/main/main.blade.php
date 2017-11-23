@@ -46,7 +46,13 @@
             }
         </style>
         <div class="sixteen wide column">
-            <a class="ui red tag label">{{getcwd()}}</a>
+            <a class="ui red tag label">
+                <?php $path = getcwd()."/../storage/course/images/1";
+                    echo $path;
+                ?>
+            </a>
+            
+            <img src="<?php echo $path; ?>"/>
         </div>
 
         <div class="sixteen wide column">
