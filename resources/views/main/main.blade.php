@@ -46,7 +46,9 @@
             }
         </style>
         <div class="sixteen wide column">
-            <a class="ui red tag label">{{getcwd()}}</a>
+            <a class="ui red tag label">emad</a>
+            <img class="ui medium image" alt="eifi" src="/home/turathalanbiaa/public_html/storage/student/paper/05bOj91USuD6Aswq2pvEgVMkX4ymz7ANnyOuwgwUSFBKN6uAi1AXstfGlrgMnUEL2QLQ4c4L5RD2cfZxZQZ2LubhEQZlujDLXPGMlvlCbb4v6fQXarm9zYToE1F2Cpgz">
+            <img class="ui small image" src="/images/wireframe/image.png">
         </div>
 
         <div class="sixteen wide column">
