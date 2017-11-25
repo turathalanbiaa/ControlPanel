@@ -13,8 +13,8 @@
         <div class="sixteen wide column">
             <div class="ui fluid black large four buttons">
                 <a href="/home"  class="ui button">الرئيسية</a>
-                <a href="/timetable" class="ui button">بحث دروس</a>
-                <a href="/timetable/pre-update-lessons" class="ui button">تعديل دروس</a>
+                <a href="/timetable/pre-update-lessons" class="ui button">تعديل دروس الجدول الدراسي</a>
+                <a href="/timetable" class="ui button">بحث دروس في الجدول الدراسي</a>
                 <a href="/timetable/show-timetable-for-levels" class="ui button">عرض الجداول الدراسية</a>
             </div>
         </div>
@@ -62,6 +62,7 @@
                                             <div class="item" data-value="شعبة ب">{{"شعبة ب"}}</div>
                                             <div class="item" data-value="شعبة ج">{{"شعبة ج"}}</div>
                                             <div class="item" data-value="شعبة هـ">{{"شعبة هـ"}}</div>
+                                            <div class="item" data-value="شعبة د">{{"شعبة د"}}</div>
                                             <div class="item" data-value="شعبة و">{{"شعبة و"}}</div>
                                         </div>
                                     </div>
