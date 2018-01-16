@@ -6,8 +6,6 @@ use App\Model\Aqlam\Comment;
 use App\Model\Aqlam\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class CPanelController extends Controller
 {
