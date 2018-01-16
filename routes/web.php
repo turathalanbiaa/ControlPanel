@@ -79,3 +79,14 @@ Route::post('/timetable/update-lessons', 'Timetable\\TimetableController@updateL
 Route::post('/timetable/search', 'Timetable\\TimetableController@search');
 Route::get('/timetable/show-timetable-for-levels', 'Timetable\\TimetableController@timetableForEachLevels');
 /***********************************************************************************************************/
+Route::get('/aqlam/','Aqlam\\CPanelController@cPanel');
+Route::get('/aqlam/view/{id}','Aqlam\\CPanelController@view');
+Route::post('/aqlam/comment_destroy','Aqlam\\CpanelController@commentDestroy');
+Route::post('/aqlam/post_destroy','Aqlam\\CpanelController@postDestroy');
+Route::post('/aqlam/post_confirm','Aqlam\\CpanelController@postConfirm');
+/***********************************************************************************************************/
+Route::get('/library/','Library\\IndexController@view');
+Route::get('/library/add_book','Library\\IndexController@addBook');
+Route::post('/library/upload_book','Library\\IndexController@uploadBook');
+Route::post('/library/destroy_book','Library\\IndexController@destroyBook');
+Route::get('/library/aa','Library\\IndexController@aa');
