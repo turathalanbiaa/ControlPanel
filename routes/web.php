@@ -81,9 +81,9 @@ Route::get('/timetable/show-timetable-for-levels', 'Timetable\\TimetableControll
 /***********************************************************************************************************/
 Route::get('/aqlam/','Aqlam\\CPanelController@cPanel');
 Route::get('/aqlam/view/{id}','Aqlam\\CPanelController@view');
-Route::post('/aqlam/comment_destroy','Aqlam\\CpanelController@commentDestroy');
-Route::post('/aqlam/post_destroy','Aqlam\\CpanelController@postDestroy');
-Route::post('/aqlam/post_confirm','Aqlam\\CpanelController@postConfirm');
+Route::post('/aqlam/comment_destroy','Aqlam\\CPanelController@commentDestroy');
+Route::post('/aqlam/post_destroy','Aqlam\\CPanelController@postDestroy');
+Route::post('/aqlam/post_confirm','Aqlam\\CPanelController@postConfirm');
 /***********************************************************************************************************/
 Route::get('/library/','Library\\IndexController@view');
 Route::get('/library/add_book','Library\\IndexController@addBook');
