@@ -59,6 +59,8 @@ class MainController extends Controller
                 $_SESSION['MAP'] = Map::MAP_STUDENT_MANAGER; break;
             case AdminType::COURSE_MANAGER:
                 $_SESSION{'MAP'} = Map::MAP_COURSE_MANAGER; break;
+            case AdminType::AQLAM_AND_LIBRARY:
+                $_SESSION{'MAP'} = Map::MAP_AQLAM_AND_LIBRARY; break;
         }
 
         return redirect('/')->with("SuccessRegisterMessage" , 'تم تسجيل الدخول الى لوحة التحكم بنجاح');
@@ -99,6 +101,12 @@ class MainController extends Controller
 
             case Map::MAPS['ShowLecturerMessage']:
                 return "this ShowLecturerMessage page";
+
+            case Map::MAPS['Aqlam']:
+                return redirect("/aqlam/");
+
+            case Map::MAPS['Library']:
+                return redirect("/library/");
         }
 
         return view("message.warning_message");

@@ -18,6 +18,8 @@ class Map
         "TimeTable" => 4,
         "Announcement" => 5,
         "ShowLecturerMessage" => 6,
+        "Aqlam" => 7,
+        "Library" => 8
     );
 
 
@@ -40,5 +42,10 @@ class Map
         self::MAPS['CoursesAndLessonsAndEExam'],
         self::MAPS['TimeTable'],
         self::MAPS['Announcement']
+    );
+
+    const MAP_AQLAM_AND_LIBRARY = array(
+        self::MAPS["Aqlam"],
+        self::MAPS["Library"]
     );
 }

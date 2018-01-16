@@ -14,4 +14,5 @@ class AdminType
     const ADMINISTRATOR = 1;
     const STUDENT_MANAGER = 2;
     const COURSE_MANAGER = 3;
+    const AQLAM_AND_LIBRARY = 4;
 }
