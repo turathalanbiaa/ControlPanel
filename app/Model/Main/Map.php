@@ -29,7 +29,9 @@ class Map
         self::MAPS['CoursesAndLessonsAndEExam'],
         self::MAPS['TimeTable'],
         self::MAPS['Announcement'],
-        self::MAPS['ShowLecturerMessage']
+        self::MAPS['ShowLecturerMessage'],
+        self::MAPS['Aqlam'],
+        self::MAPS['Library']
     );
 
     const MAP_STUDENT_MANAGER = array(
