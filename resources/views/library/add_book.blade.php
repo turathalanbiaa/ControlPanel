@@ -19,7 +19,7 @@
         {!! csrf_field() !!}
         <div class="field">
             <label>عنوان الكتاب</label>
-            <input id="inp-title" autocomplete="off" name="title" type="text" list="title" />
+            <input id="inp-title" autocomplete="off" name="title" type="text" list="title" required />
             <datalist id="title">
                 @foreach($booksNames as $bookName)
                 <option value="{{$bookName->BookName}}"></option>
@@ -28,7 +28,7 @@
         </div>
         <div class="field">
             <label>التصنيف</label>
-            <select class="ui fluid dropdown" name="category">
+            <select class="ui fluid dropdown" name="category" required>
                 @foreach($getCategories as $category)
                     <option value="{{$category->Category}}">{{$category->Category}}</option>
                 @endforeach
@@ -36,7 +36,7 @@
         </div>
         <div class="field">
             <label>اجزاء الكتاب</label>
-            <input type="number" class="ui fluid dropdown" name="volume" style="text-align: right"/>
+            <input type="number" class="ui fluid dropdown" name="volume" value="0" min="0" style="text-align: right" required/>
         </div>
         <div class="field">
             <label>المؤلف</label>
@@ -48,7 +48,7 @@
         </div>
         <div class="field">
             <label>الكتاب</label>
-            <input type="file" name="book" placeholder="الكتاب">
+            <input type="file" name="book" placeholder="الكتاب" required>
         </div>
         <button class="positive ui button" type="submit">اضافة الكتاب</button>
     </form>
