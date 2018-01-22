@@ -36,19 +36,7 @@
         </div>
         <div class="field">
             <label>اجزاء الكتاب</label>
-            <select class="ui fluid dropdown" name="volume">
-                <option value="">بلا</option>
-                <option value="1">الاول</option>
-                <option value="2">الثاني</option>
-                <option value="3">الثالث</option>
-                <option value="4">الرابع</option>
-                <option value="5">الخامس</option>
-                <option value="6">السادس</option>
-                <option value="7">السابع</option>
-                <option value="8">الثامن</option>
-                <option value="9">التاسع</option>
-                <option value="10">العاشر</option>
-            </select>
+            <input type="number" class="ui fluid dropdown" name="volume" style="text-align: right"/>
         </div>
         <div class="field">
             <label>المؤلف</label>

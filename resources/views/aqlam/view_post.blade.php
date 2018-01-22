@@ -8,11 +8,14 @@
     <div class="sixteen wide column">
         @include("layout.welcome_to_control_panel")
     </div>
-    @if(session('DeleteComment'))
-        <div class="ui message" style="background-color: #ff393a">
-            <p style="font-size: 25px">{{session('DeleteComment')}}</p>
-        </div>
-    @endif
+
+    <div class="eleven wide column">
+        @if(session('DeleteComment'))
+            <div class="ui message" style="background-color: #ff393a">
+                <p style="font-size: 25px">{{session('DeleteComment')}}</p>
+            </div>
+        @endif
+    </div>
     <div class="eleven wide column">
        <img src="http://aqlam.turathalanbiaa.com/aqlam/image/{{$getPost->image}}" style="width: 100%">
     </div>

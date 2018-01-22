@@ -29,7 +29,7 @@ class IndexController extends Controller
        $this->validate($request,[
             'title'=>'required',
             'category'=>'required',
-            'book'=>'required|mimes:pdf'
+            'book'=>'required|mimes:pdf,docx,epub'
         ]);
         $data = new Book;
         $data->BookName= $request->input('title');
