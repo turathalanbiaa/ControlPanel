@@ -47,6 +47,10 @@
             <input type="text" name="publication" placeholder="دار النشر">
         </div>
         <div class="field">
+            <label>صورة الكتاب</label>
+            <input type="file" name="picture" placeholder="الكتاب">
+        </div>
+        <div class="field">
             <label>الكتاب</label>
             <input type="file" name="book" placeholder="الكتاب" required>
         </div>

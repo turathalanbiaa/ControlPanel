@@ -8,4 +8,5 @@ class Book extends Model
 {
     protected $connection = 'mysql3';
     public $timestamps = false;
+    protected $primaryKey = "No";
 }
