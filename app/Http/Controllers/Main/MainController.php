@@ -59,8 +59,12 @@ class MainController extends Controller
                 $_SESSION['MAP'] = Map::MAP_STUDENT_MANAGER; break;
             case AdminType::COURSE_MANAGER:
                 $_SESSION{'MAP'} = Map::MAP_COURSE_MANAGER; break;
-            case AdminType::AQLAM_AND_LIBRARY:
-                $_SESSION{'MAP'} = Map::MAP_AQLAM_AND_LIBRARY; break;
+            case AdminType::AQLAM_AND_LIBRARY_MANAGER:
+                $_SESSION{'MAP'} = Map::MAP_AQLAM_AND_LIBRARY_MANAGER; break;
+            case AdminType::AQLAM_MANAGER:
+                $_SESSION{'MAP'} = Map::MAP_AQLAM_MANAGER; break;
+            case AdminType::LIBRARY_MANAGER:
+                $_SESSION{'MAP'} = Map::MAP_LIBRARY_MANAGER; break;
         }
 
         return redirect('/')->with("SuccessRegisterMessage" , 'تم تسجيل الدخول الى لوحة التحكم بنجاح');

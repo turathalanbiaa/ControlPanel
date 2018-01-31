@@ -46,8 +46,16 @@ class Map
         self::MAPS['Announcement']
     );
 
-    const MAP_AQLAM_AND_LIBRARY = array(
+    const MAP_AQLAM_AND_LIBRARY_MANAGER = array(
         self::MAPS["Aqlam"],
+        self::MAPS["Library"]
+    );
+
+    const MAP_AQLAM_MANAGER = array(
+        self::MAPS["Aqlam"]
+    );
+
+    const MAP_LIBRARY_MANAGER = array(
         self::MAPS["Library"]
     );
 }
