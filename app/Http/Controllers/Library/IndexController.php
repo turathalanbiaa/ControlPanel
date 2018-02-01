@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Tests\B;
 use ZanySoft\Zip\Zip;
 use ZanySoft\Zip\ZipFacade;
 use ZanySoft\Zip\ZipManager;
+use Imagick;
 
 class IndexController extends Controller
 {
@@ -48,6 +49,7 @@ class IndexController extends Controller
             $request->file('picture')->storeAs('public',$data->No.'.jpg');
         }
         $request->file('book')->storeAs('public',$data->No.'.pdf');
+        
         if ($request->input('volume')==1)
         {
             $creatZipFil =Zip::create(storage_path('app/public/'.$data->No.'.zip'))

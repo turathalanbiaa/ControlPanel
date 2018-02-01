@@ -4,7 +4,7 @@
     <title>المراحل الدراسية</title>
 @endsection
 @section('content')
-<div class="ui grid">
+<div class="ui grid" style="font-size: 18px">
     <div class="sixteen wide column">
         @include("layout.welcome_to_control_panel")
     </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
         <div class="one wide column">
-            <img src="{{asset('avatar.png')}}">
+            <img src="http://aqlam.turathalanbiaa.com/aqlam/image/{{$getPost->picture}}">
         </div>
         <div class="four wide column">
             <p>{{$getPost->user->name}}</p>
@@ -41,7 +41,7 @@
             <input type="hidden" name="post_confirm" value="{{$getPost->id}}">
             <button class="positive ui button">قبول التدوية</button>
         </form>
-        <button class="primary ui button">تعديل التدوينة</button>
+        <a href="/aqlam/post_edit_form/{{$getPost->id}}" class="primary ui button" >تعديل التدوينة</a>
         <button class="negative ui button" id="delete_post">حذف التدوينة</button>
     </div>
 </div>

@@ -84,6 +84,8 @@ Route::get('/aqlam/view/{id}','Aqlam\\CPanelController@view');
 Route::post('/aqlam/comment_destroy','Aqlam\\CPanelController@commentDestroy');
 Route::post('/aqlam/post_destroy','Aqlam\\CPanelController@postDestroy');
 Route::post('/aqlam/post_confirm','Aqlam\\CPanelController@postConfirm');
+Route::get('/aqlam/post_edit_form/{id}','Aqlam\\CPanelController@postEditForm');
+Route::post('/aqlam/post_edit','Aqlam\\CPanelController@postEdit');
 /***********************************************************************************************************/
 Route::get('/library/','Library\\IndexController@view');
 Route::get('/library/add_book','Library\\IndexController@addBook');

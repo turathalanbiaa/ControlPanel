@@ -11,6 +11,11 @@
             <p style="font-size: 25px">{{session('deletePost')}}</p>
         </div>
     @endif
+    @if(session('UpdateMassage'))
+        <div class="ui visible message" style="background-color: #ff393a">
+            <p style="font-size: 25px">{{session('UpdateMassage')}}</p>
+        </div>
+    @endif
 <table class="ui compact celled definition table" style="text-align: right">
     <thead>
     <tr>

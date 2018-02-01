@@ -6,6 +6,7 @@ use App\Model\Aqlam\Comment;
 use App\Model\Aqlam\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CPanelController extends Controller
 {
@@ -47,5 +48,24 @@ class CPanelController extends Controller
         $id = $request->input('post_confirm');
         Post::where('id',$id)->update(['status'=>1]);
         return redirect('/aqlam')->with('post_Confirm','تمت الموافقة على التدوينة');
+    }
+    function postEditForm ($id)
+    {
+        $getPost = Post::find($id);
+        return view('aqlam.edit_post',array('getPost'=>$getPost));
+    }
+    function postEdit (Request $request)
+    {
+        $this->validate($request , array(
+            'title'   => 'required',
+            'content' => 'required'
+        ));
+        $updatePost = post::where('id',$request->input('post_id'))
+            ->update(['title'=>$request->input('title'),'content'=>$request->input('content')]);
+        if ($updatePost)
+        {
+            return redirect('/aqlam')->with('UpdateMassage','تم تعديل التدوينة');
+        }
+        return redirect('/aqlam')->with('UpdateMassage','لا يمكن تعديل التدوينة هنالك خطأ');
     }
 }
