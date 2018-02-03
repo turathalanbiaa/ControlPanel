@@ -28,11 +28,17 @@
         </div>
         <div class="field">
             <label>التصنيف</label>
-            <select class="ui fluid dropdown" name="category" required>
+            {{--<select class="ui fluid dropdown" name="category" required>--}}
+                {{--@foreach($getCategories as $category)--}}
+                    {{--<option value="{{$category->Category}}">{{$category->Category}}</option>--}}
+                {{--@endforeach--}}
+            {{--</select>--}}
+            <input id="inp-category" autocomplete="off" name="category" type="text" list="category" required />
+            <datalist id="category">
                 @foreach($getCategories as $category)
                     <option value="{{$category->Category}}">{{$category->Category}}</option>
                 @endforeach
-            </select>
+            </datalist>
         </div>
         <div class="field">
             <label>اجزاء الكتاب</label>

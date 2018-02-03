@@ -37,6 +37,12 @@ class IndexController extends Controller
             'book'=>'required|mimes:pdf,docx,epub',
             'picture'=>'required|mimes:jpeg,bmp,png,jpg'
         ]);
+        $findCategory = DB::connection('mysql3')->table('Categories')->select('Category')->where('Category',$request->input('category'))->get();
+        if(count($findCategory)==0)
+        {
+            $insertCategory = array('Category'=>$request->input('category'));
+            DB::connection('mysql3')->table('Categories')->insert($insertCategory);
+        }
         $data = new Book;
         $data->BookName      = $request->input('title');
         $data->AuthorID      = $request->input('author');
