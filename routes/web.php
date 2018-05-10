@@ -92,3 +92,10 @@ Route::get('/library/add_book','Library\\IndexController@addBook');
 Route::post('/library/upload_book','Library\\IndexController@uploadBook');
 Route::post('/library/destroy_book','Library\\IndexController@destroyBook');
 Route::get('/library/aa','Library\\IndexController@aa');
+/***********************************************************************************************************/
+Route::get('/daleel-alsaam/','DaleelAlsaam\\CalenderController@show');
+Route::post('/daleel-alsaam/delete','DaleelAlsaam\\CalenderController@delete');
+
+Route::get('/daleel-alsaam/add','DaleelAlsaam\\CalenderController@add');
+Route::post('/daleel-alsaam/create','DaleelAlsaam\\CalenderController@create');
+Route::post('/daleel-alsaam/add','DaleelAlsaam\\CalenderController@validation');

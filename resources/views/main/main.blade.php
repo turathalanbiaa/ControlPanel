@@ -144,6 +144,21 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="column">
+                    <div class="special card">
+                        <div class="special image">
+                            <img src="{{asset("assets/images/StudentsManager.png")}}">
+                        </div>
+
+                        <form class="ui form" method="post" action="/redirect">
+                            {!! csrf_field() !!}
+                            <input type="hidden" name="type" value="{{$_SESSION["USER_TYPE"]}}">
+                            <input type="hidden" name="map" value="{{\App\Model\Main\Map::MAPS['Daleel_Alsaam']}}">
+                            <button type="submit" class="ui fluid massive green button">دليل الصائم</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

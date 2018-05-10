@@ -19,9 +19,9 @@ class Map
         "Announcement" => 5,
         "ShowLecturerMessage" => 6,
         "Aqlam" => 7,
-        "Library" => 8
+        "Library" => 8,
+        "Daleel_Alsaam" => 9
     );
-
 
     const MAP_ADMINISTRATOR = array(
         self::MAPS['Student'],
@@ -57,5 +57,9 @@ class Map
 
     const MAP_LIBRARY_MANAGER = array(
         self::MAPS["Library"]
+    );
+
+    const MAP_DALEEL_ALSAAM_MANAGER = array(
+        self::MAPS["Daleel_Alsaam"]
     );
 }

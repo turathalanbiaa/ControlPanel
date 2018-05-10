@@ -17,4 +17,5 @@ class AdminType
     const AQLAM_AND_LIBRARY_MANAGER = 4;
     const AQLAM_MANAGER = 5;
     const LIBRARY_MANAGER = 6;
+    const DALEEL_ALSAAM_MANAGER = 7;
 }

@@ -73,6 +73,16 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',
         ],
+        'mysql4' => [
+            'driver' => env('DB_CONNECTION_FOURTH'),
+            'host' => env('DB_HOST_FOURTH'),
+            'port' => env('DB_PORT_FOURTH'),
+            'database' => env('DB_DATABASE_FOURTH'),
+            'username' => env('DB_USERNAME_FOURTH'),
+            'password' => env('DB_PASSWORD_FOURTH'),
+            'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
