@@ -39,15 +39,16 @@
                             <option value="ميسان">ميسان</option>
                             <option value="واسط">واسط</option>
                             <option value="بابل">بابل</option>
-                            <option value="ديالى">ديالى</option>
                             <option value="الانبار">الانبار</option>
                             <option value="صلاح الدين">صلاح الدين</option>
                             <option value="الموصل">الموصل</option>
                             <option value="ديالى">ديالى</option>
-                            <option value="السبت">كركوك</option>
+                            <option value="كركوك">كركوك</option>
                             <option value="السليمانية">السليمانية</option>
                             <option value="اربيل">اربيل</option>
                             <option value="دهوك">دهوك</option>
+                            <option value="فلوجة">فلوجة</option>
+                            <option value="المثنى">المثنى</option>
                         </select>
                     </div>
 
