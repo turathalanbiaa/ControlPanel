@@ -17,6 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post("/api/daleel/alsaam/calender", function (){
+Route::post("/api/daleel/calender", function (){
     return \App\Model\DaleelAlsaam\Calender::all();
 });
