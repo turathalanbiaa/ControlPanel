@@ -24,7 +24,7 @@ class IndexController extends Controller
     }
     function addBook ()
     {
-        $getCategories = DB::connection('mysql3')->table('Categories')->select('Category')->get();
+        $getCategories = DB::connection('mysql3')->table('categories')->select('Category')->get();
         $booksNames = Book::select('BookName')->where('Volume',1)->get();
         return view('library.add_book',array('getCategories'=>$getCategories,'booksNames'=>$booksNames));
     }
@@ -41,7 +41,7 @@ class IndexController extends Controller
         if(count($findCategory)==0)
         {
             $insertCategory = array('Category'=>$request->input('category'));
-            DB::connection('mysql3')->table('Categories')->insert($insertCategory);
+            DB::connection('mysql3')->table('categories')->insert($insertCategory);
         }
         $data = new Book;
         $data->BookName      = $request->input('title');
