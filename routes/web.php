@@ -98,14 +98,13 @@ Route::post('/daleel-alsaam/delete','DaleelAlsaam\\CalenderController@delete');
 
 Route::get('/daleel-alsaam/add','DaleelAlsaam\\CalenderController@add');
 Route::post('/daleel-alsaam/create','DaleelAlsaam\\CalenderController@create');
-Route::post('/daleel-alsaam/add','DaleelAlsaam\\CalenderController@validation');
-
-
-
-
-
 
 Route::get("/api/daleel/calender", function (){
+    $city = \Illuminate\Support\Facades\Input::get("city" , "");
+    return \App\Model\DaleelAlsaam\Calender::where("city" , $city)->get();
+});
+
+Route::post("/api/daleel/calender", function (){
     $city = \Illuminate\Support\Facades\Input::get("city" , "");
     return \App\Model\DaleelAlsaam\Calender::where("city" , $city)->get();
 });
