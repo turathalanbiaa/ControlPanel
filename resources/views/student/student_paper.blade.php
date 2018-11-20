@@ -25,7 +25,7 @@
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["1"]))
-                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["1"]->Image}}" style="height:400px;">
+                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["1"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -66,7 +66,7 @@
                         <div class="ui top attached header">التزكية الدينية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["2"]))
-                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["2"]->Image}}" style="height:400px;">
+                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["2"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
@@ -106,7 +106,7 @@
                         <div class="ui top attached header">الشهادة العلمية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["3"]))
-                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["3"]->Image}}" style="height:400px;">
+                                <img class="ui image" src="http://edu.turathalanbiaa.com/storage/student/paper/{{$papers["3"]->Image}}">
                             @else
                                 <div class="sm-space"></div>
                                 <div class="sm-space"></div>
