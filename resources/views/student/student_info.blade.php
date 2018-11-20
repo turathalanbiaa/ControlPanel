@@ -7,11 +7,11 @@
 @section("content")
     <div class="ui grid">
         <div class="sixteen wide column">
-            @include("layout.welcome_to_control_panel")
+            {{--@include("layout.welcome_to_control_panel")--}}
         </div>
 
         <div class="sixteen wide column">
-            <div class="ui fluid large black buttons">
+            <div class="ui fluid large  buttons">
                 <a href="/home" class="ui button">الرئيسية</a>
                 <a href="/students/show" class="ui button">بحث عن طالب</a>
                 <a href="/student/change-password/{{$student->ID}}" class="ui button">تغيير كلمة المرور</a>
@@ -75,7 +75,7 @@
             </div>
         @endif
 
-        <div class="sixteen wide column">
+        <div class="centered sixteen wide column">
             <div class="ui segment">
                 <h2 class="ui center aligned dividing green header">بيانات الطالب</h2>
                 <div class="ui grid">
@@ -228,7 +228,7 @@
                             <div class="inline fields">
                                 <div class="four wide field"></div>
                                 <div class="twelve wide field">
-                                    <button class="ui large green button" type="submit" style="margin: auto;">حفظ التعديلات</button>
+                                    <button class="ui large  button" type="submit" style="margin: auto;">حفظ التعديلات</button>
                                 </div>
                             </div>
                         </form>

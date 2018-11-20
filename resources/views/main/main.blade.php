@@ -91,7 +91,7 @@
                             <img src="{{asset("assets/images/StudentsManager.png")}}">
                         </div>
 
-                        <form class="ui form" method="post" action="/redirect">
+                        <form class="ui form" method="post" action="/announcement">
                             {!! csrf_field() !!}
                             <input type="hidden" name="type" value="{{$_SESSION["USER_TYPE"]}}">
                             <input type="hidden" name="map" value="{{\App\Model\Main\Map::MAPS['Announcement']}}">

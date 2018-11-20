@@ -7,7 +7,7 @@
 @section("content")
     <div class="ui grid">
         <div class="sixteen wide column">
-            @include("layout.welcome_to_control_panel")
+            {{--@include("layout.welcome_to_control_panel")--}}
         </div>
 
         <div class="sixteen wide column">
@@ -17,7 +17,11 @@
                     <div class="ui dimmer" id="dimmer">
                         <div class="ui text loader">جاري التحميل...</div>
                     </div>
-                    <div class="column">
+
+
+
+
+
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["1"]))
@@ -34,7 +38,7 @@
                                 <div class="sm-space"></div>
                             @endif
                         </div>
-                        <div class="ui bottom attached inverted segment">
+                        <div class="ui bottom attached  segment">
                             <div class="ui three column grid">
                                 <div class="column">
                                     <button class="ui fluid inverted yellow button @if(empty($papers['1'])) {{"disabled"}} @endif"
@@ -56,9 +60,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="column">
+
+
                         <div class="ui top attached header">التزكية الدينية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["2"]))
@@ -75,7 +79,7 @@
                                 <div class="sm-space"></div>
                             @endif
                         </div>
-                        <div class="ui bottom attached inverted segment">
+                        <div class="ui bottom attached  segment">
                             <div class="ui three column grid">
                                 <div class="column">
                                     <button class="ui fluid inverted yellow button @if(empty($papers['2'])) {{"disabled"}} @endif"
@@ -97,9 +101,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="column">
+
                         <div class="ui top attached header">الشهادة العلمية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["3"]))
@@ -116,7 +119,7 @@
                                 <div class="sm-space"></div>
                             @endif
                         </div>
-                        <div class="ui bottom attached inverted segment">
+                        <div class="ui bottom attached  segment">
                             <div class="ui three column grid">
                                 <div class="column">
                                     <button class="ui fluid inverted yellow button @if(empty($papers['3'])) {{"disabled"}} @endif"
@@ -138,7 +141,7 @@
                                 </div>
                             </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
