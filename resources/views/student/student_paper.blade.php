@@ -7,7 +7,7 @@
 @section("content")
     <div class="ui grid">
         <div class="sixteen wide column">
-            <img class="ui image" src="http://edu.turathalanbiaa.com/storage/announcement/images/p.jpg">
+
             {{--@include("layout.welcome_to_control_panel")--}}
         </div>
 
