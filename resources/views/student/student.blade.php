@@ -58,6 +58,7 @@
                         <a href="/home"  class="ui button">الرئيسية</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
+                        <a href="/student_message" class="ui button">ارسال رسالة</a>
                     </div>
                 </div>
             </div>
