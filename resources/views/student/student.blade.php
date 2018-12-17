@@ -37,6 +37,18 @@
                                     <input type="radio" name="option" value="3"  class="hidden">
                                 </div>
                             </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <label for="option">المرحلة</label>
+                                    <input type="radio" name="option" value="4"  class="hidden">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <label for="option">الجنس</label>
+                                    <input type="radio" name="option" value="5"  class="hidden">
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

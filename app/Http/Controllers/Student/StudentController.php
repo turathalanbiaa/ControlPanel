@@ -62,6 +62,8 @@ class StudentController extends Controller
             case 1 : $students = Student::where('ID', '=', $query)->get(); break;
             case 2 : $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get(); break;
             case 3 : $students = Student::where('email', 'LIKE', '%'.$query.'%')->take(100)->get(); break;
+            case 4 : $students = Student::where('level', '=', $query)->take(100)->get(); break;
+            case 5 : $students = Student::where('gender', '=', $query)->take(100)->get(); break;
             default: $students = Student::where('name', 'LIKE', '%'.$query.'%')->take(100)->get();
         }
 
