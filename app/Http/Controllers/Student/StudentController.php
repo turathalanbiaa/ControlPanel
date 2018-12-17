@@ -570,7 +570,7 @@ class StudentController extends Controller
 
             $message = new Message();
             $message->Message = $mymessage;
-            $message->Time = "2018-12-17 00:00:00";
+            $message->Time = date("Y-m-d");
             $message->Sender = 11;
             $message->Target = $student->ID;
             $message->SenderType = 2;
@@ -590,7 +590,7 @@ class StudentController extends Controller
 
             $message = new Message();
             $message->Message = $mymessage;
-            $message->Time = "2018-12-17 00:00:00";
+            $message->Time = date("Y-m-d");
             $message->Sender = 11;
             $message->Target = $student->ID;
             $message->SenderType = 2;
