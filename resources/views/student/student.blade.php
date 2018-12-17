@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="six wide column">
-                    <div class="ui fluid black large three buttons">
+                    <div class="ui fluid black large four buttons">
                         <a href="/home"  class="ui button">الرئيسية</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LEGAL_STUDENT}}" class="ui button">اضافة طالب</a>
                         <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
