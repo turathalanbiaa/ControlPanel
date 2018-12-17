@@ -6,10 +6,10 @@
 
 @section("content")
     <div class="ui grid">
-        <div class="sixteen wide column">
-            <img class="ui image" src="http://edu.turathalanbiaa.com/storage/announcement/images/p.jpg" style="width: 100%">
+        {{--<div class="sixteen wide column">--}}
+          {{----}}
             {{--@include("layout.welcome_to_control_panel")--}}
-        </div>
+        {{--</div>--}}
 
         <div class="sixteen wide column">
             <div class="ui fluid large  buttons">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         @endif
-
+  <img class="ui image" src="http://edu.turathalanbiaa.com/storage/announcement/images/p.jpg" style="width: 100%">
         <div class="centered sixteen wide column">
             <div class="ui segment">
                 <h2 class="ui center aligned dividing green header">بيانات الطالب</h2>

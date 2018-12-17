@@ -108,3 +108,6 @@ Route::post("/api/daleel/calender", function (){
     $city = \Illuminate\Support\Facades\Input::get("city" , "");
     return \App\Model\DaleelAlsaam\Calender::where("city" , $city)->orderBy("ramadanDay", "ASC")->get();
 });
+Route::post('/female_message','Student\\StudentController@female_message');
+Route::post('/male_message','Student\\StudentController@male_message');
+Route::get('/student_message','Student\\StudentController@student_message');
