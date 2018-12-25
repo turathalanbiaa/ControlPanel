@@ -53,4 +53,8 @@ class LecturerController extends Controller
             "courses" => $courses
         ]);
     }
+
+    public function create() {
+        dd("OK");
+    }
 }
