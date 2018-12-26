@@ -564,7 +564,7 @@ class StudentController extends Controller
     public function female_message(Request $request)
     {
 
-        $mymessage = Input::get("mymessage");
+        $mymessage = Input::get("mymessage2");
 
         $students = Student::where('gender', '=', 'female')->get();
         foreach ($students as $student) {

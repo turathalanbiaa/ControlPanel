@@ -80,7 +80,7 @@
             {!! csrf_field() !!}
             <div class="inline fields">
                 <div class="twelve wide field">
-                    <textarea cols="70" rows="8" name="mymessage" id="mymessage" placeholder="رسالة الى الاناث"></textarea>
+                    <textarea cols="70" rows="8" name="mymessage2" id="mymessage2" placeholder="رسالة الى الاناث"></textarea>
                     <button class="ui large green center aligned  button" type="submit" style="margin: auto;">ارسال</button>
 
                 </div>
@@ -90,4 +90,15 @@
         </form>
 
     </div>
+    <script>
+        $('.ui.form')
+            .form({
+                fields: {
+                    mymessage     : 'empty',
+                    mymessage2   : 'empty'
+
+                }
+            })
+        ;
+    </script>
 @endsection

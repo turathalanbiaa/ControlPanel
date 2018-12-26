@@ -68,8 +68,8 @@
             {!! csrf_field() !!}
 
                 <div class="twelve field">
-                    <textarea cols="70"  rows="1" name="Title" id="Title" placeholder="عنوان الاعلان"></textarea>
-                    <textarea cols="70"  rows="5" name="Content" id="Content" placeholder="محتوى الاعلان"></textarea>
+                    <textarea    class="required"   cols="70"  rows="1" name="Title" id="Title" placeholder="عنوان الاعلان"></textarea>
+                    <textarea   class="required"   cols="70"  rows="5" name="Content" id="Content" placeholder="محتوى الاعلان"></textarea>
 
                 </div>
 
@@ -79,4 +79,15 @@
 
 
     </div>
+    <script>
+        $('.ui.form')
+            .form({
+                fields: {
+                    Title     : 'empty',
+                    Content   : 'empty'
+
+                }
+            })
+        ;
+    </script>
 @endsection
