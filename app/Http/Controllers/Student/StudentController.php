@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Model\Announcement\Announcement;
 use App\Model\EventLog\EventLog;
 use App\Model\Main\Authorization;
 use App\Model\Main\Login;
@@ -580,6 +581,25 @@ class StudentController extends Controller
 
         }
         return redirect('/student_message');
+    }
+
+    public function add_announcement(Request $request)
+    {
+
+        $announcement = new Announcement();
+        $announcement->Title = Input::get("Title");
+        $announcement->Content = Input::get("Content");
+        $announcement->Image = "m6.png";
+        $announcement->Type = 1;
+        $announcement->Date = date("Y-m-d");
+        $announcement->Activity = 1;
+        $announcement->save();
+
+        return redirect('/add_announcement');
+    }
+    public function student_announcement()
+    {
+        return view('announcement.announcement');
     }
 
     public function male_message(Request $request)
