@@ -8,7 +8,7 @@
 
         <div class="sixteen wide column">
             <div class=" ui grid">
-                <div class="seven wide column">
+                <div class="five wide column">
                     <form class="ui large form" method="get" action="/students/search" dir="rtl">
                         <div class="ui left icon input" style="width: 100%; text-align: right;">
                             <input type="text" placeholder="بحث عن طالب" name="query" value="" style="text-align: right;">
@@ -60,6 +60,8 @@
                         <a href="/student/create/{{\App\Model\Student\StudentType::LISTENER}}" class="ui button">اضافة مستمع</a>
                         <a href="/student_message" class="ui button">ارسال رسالة</a>
                         <a href="/add_announcement" class="ui button">ارسال اعلان</a>
+                        <a href="/issues" class="ui button" style="width: 170px">شكوى او مقترح</a>
+
                     </div>
                 </div>
             </div>

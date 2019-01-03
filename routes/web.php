@@ -113,3 +113,4 @@ Route::post('/male_message','Student\\StudentController@male_message');
 Route::get('/student_message','Student\\StudentController@student_message');
 Route::post('/add_announcement','Student\\StudentController@add_announcement');
 Route::get('/add_announcement','Student\\StudentController@student_announcement');
+Route::get('/issues','issue\\IssueController@issue');

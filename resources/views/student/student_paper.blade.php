@@ -19,10 +19,6 @@
                         <div class="ui text loader">جاري التحميل...</div>
                     </div>
 
-
-
-
-
                         <div class="ui top attached header">الهوية الشخصية</div>
                         <div class="ui attached segment">
                             @if(!empty($papers["1"]))
@@ -61,8 +57,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
                         <div class="ui top attached header">التزكية الدينية</div>
                         <div class="ui attached segment">
