@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Aqlam;
 
 use App\Model\Aqlam\Comment;
 use App\Model\Aqlam\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -43,10 +44,15 @@ class CPanelController extends Controller
         }
         return redirect('/aqlam/');
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     function postConfirm (Request $request)
     {
         $id = $request->input('post_confirm');
-        Post::where('id',$id)->update(['status'=>1]);
+        Post::where('id',$id)->update(['status'=>1, 'created_at'=>Carbon::now('Europe/London')]);
         return redirect('/aqlam')->with('post_Confirm','تمت الموافقة على التدوينة');
     }
     function postEditForm ($id)
