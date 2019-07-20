@@ -12,34 +12,34 @@ namespace App\Model\Student;
 class Level
 {
     const BEGINNER = 1;
-    const FIRST_LEVEL_INTRO = 2;
-    const SECOND_LEVEL_INTRO = 3;
-    const THIRD_LEVEL_INTRO = 4;
-    const FIRST_LEVEL_UP = 5;
-    const SECOND_LEVEL_UP = 6;
-    const THIRD_LEVEL_UP = 7;
+    const INTRO_FIRST_PART_ONE = 2;
+    const INTRO_FIRST_PART_TWO = 3;
+    const INTRO_SECOND_PART_ONE = 4;
+    const INTRO_SECOND_PART_TWO = 5;
+    const INTRO_THIRD_PART_ONE = 6;
+    const INTRO_THIRD_PART_TWO = 7;
 
 
     public static function getLevelName($levelNumber)
     {
         switch ($levelNumber)
         {
-            case Level::BEGINNER:
-                return "تمهيدي";
-            case Level::FIRST_LEVEL_INTRO:
-                return "مقدمات مرحلة اولى";
-            case Level::SECOND_LEVEL_INTRO:
-                return "مقدمات مرحلة ثانية";
-            case Level::THIRD_LEVEL_INTRO:
-                return "مقدمات مرحلة ثالثة";
-            case Level::FIRST_LEVEL_UP:
-                return "سطوح مرحلة اولى";
-            case Level::SECOND_LEVEL_UP:
-                return "سطوح مرحلة ثانية";
-            case Level::THIRD_LEVEL_UP:
-                return "سطوح مرحلة ثالثة";
+            case self::BEGINNER:
+                return "المرحلة التمهيدية";
+            case self::INTRO_FIRST_PART_ONE:
+                return "المقدمات المرحلة الأولى المستوى الأول";
+            case self::INTRO_FIRST_PART_TWO:
+                return "المقدمات المرحلة الأولى المستوى الثاني";
+            case self::INTRO_SECOND_PART_ONE:
+                return "المقدمات المرحلة الثانية المستوى الأول";
+            case self::INTRO_SECOND_PART_TWO:
+                return "المقدمات المرحلة الثانية المستوى الثاني";
+            case self::INTRO_THIRD_PART_ONE:
+                return "المقدمات المرحلة الثالثة المستوى الأول";
+            case self::INTRO_THIRD_PART_TWO:
+                return "المقدمات المرحلة الثالثة المستوى الثاني";
             default:
-                return "مستمع";
+                return "";
         }
     }
 }

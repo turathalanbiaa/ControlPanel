@@ -21,11 +21,7 @@
         </div>
 
         <div class="sixteen wide column">
-            @include("timetable.fixedTimeTable.timeTableForBeginner")
-
-            @include("timetable.fixedTimeTable.timeTableForFirstLevelIntro")
-
-            @include("timetable.fixedTimeTable.timeTableForSecondLevelIntro")
+            <h2 class="ui center aligned header">سيتم تحديث الجداول الدراسية قريبا</h2>
         </div>
     </div>
 @endsection

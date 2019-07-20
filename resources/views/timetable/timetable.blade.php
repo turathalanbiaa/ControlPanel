@@ -34,9 +34,12 @@
                                 <div class="default text">اختر المرحلة</div>
                                 <div class="menu">
                                     <div class="item" data-value="{{\App\Model\Student\Level::BEGINNER}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::BEGINNER)}}</div>
-                                    <div class="item" data-value="{{\App\Model\Student\Level::FIRST_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::FIRST_LEVEL_INTRO)}}</div>
-                                    <div class="item" data-value="{{\App\Model\Student\Level::SECOND_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SECOND_LEVEL_INTRO)}}</div>
-                                    <div class="item" data-value="{{\App\Model\Student\Level::THIRD_LEVEL_INTRO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::THIRD_LEVEL_INTRO)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_FIRST_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_FIRST_PART_ONE)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_FIRST_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_FIRST_PART_TWO)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_SECOND_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_SECOND_PART_ONE)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_SECOND_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_SECOND_PART_TWO)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_ONE)}}</div>
+                                    <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_TWO)}}</div>
                                 </div>
                             </div>
                         </div>
