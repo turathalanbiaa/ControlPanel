@@ -24,7 +24,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -71,7 +71,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -118,7 +118,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -165,7 +165,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -212,7 +212,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -259,7 +259,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -306,7 +306,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
@@ -353,7 +353,7 @@
                 <td style="width: 80px !important; text-align: center;">
                     <div class="ui mini vertical buttons">
                         <a class="ui button" href="/course/info-{{$course->ID}}">عرض</a>
-                        <button class="ui button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
+                        <button class="ui red button" data-action="delete-course" data-id="{{$course->ID}}" data-content="{{$course->Name}}">حذف</button>
                     </div>
                 </td>
             </tr>
