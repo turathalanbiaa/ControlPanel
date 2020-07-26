@@ -44,6 +44,8 @@
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_SECOND_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_SECOND_PART_TWO)}}</div>
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_ONE)}}</div>
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_TWO)}}</div>
+                                            <div class="item" data-value="{{\App\Model\Student\Level::SETOH_BEGINNER_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SETOH_BEGINNER_PART_ONE)}}</div>
+                                            <div class="item" data-value="{{\App\Model\Student\Level::SETOH_BEGINNER_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SETOH_BEGINNER_PART_TWO)}}</div>
                                         </div>
                                     </div>
                                 </div>
