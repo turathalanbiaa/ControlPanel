@@ -20,7 +20,6 @@ use Illuminate\Validation\Rules\In;
 
 class StudentController extends Controller
 {
-
     public function showAll()
     {
         if (!Login::isLogin())
@@ -94,16 +93,15 @@ class StudentController extends Controller
         if (!Authorization::authorize(Map::MAPS["Student"]))
             return view("message.warning_message");
 
-        switch ($accountType) {
-            case StudentType::LEGAL_STUDENT :
-                return view("student.student_create")->with("accountType", $accountType);
-                break;
-            case StudentType::LISTENER :
-                return view("student.student_create")->with("accountType", $accountType);
-                break;
-            default :
-                return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
-        }
+        $accountTypes = array(
+            StudentType::LEGAL_STUDENT,
+            StudentType::LISTENER
+        );
+
+        if (!in_array($accountType, $accountTypes))
+            return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
+
+        return view("student.student_create")->with("accountType", $accountType);
     }
 
     public function createValidation(Request $request)
@@ -142,7 +140,6 @@ class StudentController extends Controller
                     'address.required' => 'حقل العنوان فارغ.',
                 ]);
                 break;
-
             case StudentType::LISTENER :
                 $this->validate($request, [
                     'name' => 'required',
@@ -166,7 +163,6 @@ class StudentController extends Controller
                     'country.required' => 'يرجى اختيار البلد.',
                 ]);
                 break;
-
             default :
                 return redirect('/students/show')->with('ChooseAccountMessage', 'يرجى اختيار نوع الحساب الذي تود انشاءه بالشكل الصحيح.');
         }
@@ -597,6 +593,7 @@ class StudentController extends Controller
 
         return redirect('/add_announcement');
     }
+
     public function student_announcement()
     {
         return view('announcement.announcement');
@@ -621,6 +618,7 @@ class StudentController extends Controller
 
        return redirect('/student_message');
     }
+
     public function student_message()
     {
         return view('student.add_message');
