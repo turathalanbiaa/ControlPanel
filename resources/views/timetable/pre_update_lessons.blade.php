@@ -44,6 +44,8 @@
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_SECOND_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_SECOND_PART_TWO)}}</div>
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_ONE)}}</div>
                                             <div class="item" data-value="{{\App\Model\Student\Level::INTRO_THIRD_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::INTRO_THIRD_PART_TWO)}}</div>
+                                            <div class="item" data-value="{{\App\Model\Student\Level::SETOH_BEGINNER_PART_ONE}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SETOH_BEGINNER_PART_ONE)}}</div>
+                                            <div class="item" data-value="{{\App\Model\Student\Level::SETOH_BEGINNER_PART_TWO}}">{{\App\Model\Student\Level::getLevelName(\App\Model\Student\Level::SETOH_BEGINNER_PART_TWO)}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +61,7 @@
                                     <div class="ui selection dropdown" style="width: 100%;">
                                         <input type="hidden" name="group">
                                         <i class="dropdown icon"></i>
-                                        <div class="default text">اختر المرحلة</div>
+                                        <div class="default text">اختر الشعبة</div>
                                         <div class="menu">
                                             <div class="item" data-value="شعبة أ">{{"شعبة أ"}}</div>
                                             <div class="item" data-value="شعبة ب">{{"شعبة ب"}}</div>
