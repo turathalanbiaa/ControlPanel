@@ -96,6 +96,15 @@
 
                             <div class="inline fields">
                                 <div class="four wide field">
+                                    <label for="record-number">رقم سجل القيد</label>
+                                </div>
+                                <div class="twelve wide field">
+                                    <input type="text" value="{{$student->RecordNumber}}" name="recordNumber" id="record-number">
+                                </div>
+                            </div>
+
+                            <div class="inline fields">
+                                <div class="four wide field">
                                     <label for="email">البريد الإلكتروني</label>
                                 </div>
                                 <div class="twelve wide field">

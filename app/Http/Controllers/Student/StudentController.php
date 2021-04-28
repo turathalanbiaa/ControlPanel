@@ -276,6 +276,7 @@ class StudentController extends Controller
             ]);
 
             $student->Name = Input::get("name");
+            $student->RecordNumber = Input::get("recordNumber");
             $student->Email = Input::get("email");
             $student->Phone = Input::get("phone");
             $student->Gender = Input::get("gender");
