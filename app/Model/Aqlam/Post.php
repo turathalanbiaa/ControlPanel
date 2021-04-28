@@ -8,7 +8,7 @@ class post extends Model
 {
     public $timestamps = false;
     protected $connection = 'mysql2';
-    
+
     public function rates ()
     {
         return $this->hasMany('App\Model\Aqlam\Rate');
@@ -21,6 +21,6 @@ class post extends Model
 
     public  function user ()
     {
-        return $this->belongsto('App\Model\Aqlam\User');
+        return $this->belongsTo('App\Model\Aqlam\User');
     }
 }
