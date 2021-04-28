@@ -9,4 +9,9 @@ class User extends Model
     protected $casts = [
         'id' => 'string',
     ];
+    
+    public function posts ()
+    {
+        return $this->hasMany('App\Model\Aqlam\Post');
+    }
 }

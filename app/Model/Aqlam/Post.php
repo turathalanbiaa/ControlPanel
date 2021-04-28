@@ -21,6 +21,6 @@ class post extends Model
 
     public  function user ()
     {
-        return $this->belongsto('App\Model\Aqlam\User');
+        return $this->belongsTo('App\Model\Aqlam\User');
     }
 }
