@@ -8,7 +8,7 @@ class post extends Model
 {
     public $timestamps = false;
     protected $connection = 'mysql2';
-    
+
     public function rates ()
     {
         return $this->hasMany('App\Model\Aqlam\Rate');
