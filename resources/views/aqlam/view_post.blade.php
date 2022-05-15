@@ -17,14 +17,14 @@
         @endif
     </div>
     <div class="eleven wide column">
-       <img src="http://aqlam.turathalanbiaa.com/aqlam/image/{{$getPost->image}}" style="width: 100%">
+       <img src="{{$getPost->image}}" style="width: 100%">
     </div>
     <div class="eleven wide column">
        <h3>{{$getPost->title}}</h3>
     </div>
     <div class="row">
         <div class="one wide column">
-            <img src="http://aqlam.turathalanbiaa.com/aqlam/image/{{$getPost->picture}}">
+            <img src="{{$getPost->user->picture}}" class="img-circle">
         </div>
         <div class="four wide column">
             <p>{{$getPost->user->name}}</p>
@@ -36,10 +36,15 @@
         </div>
     </div>
     <div class="row">
-        <form method="post" action="/aqlam/post_confirm">
+        <form method="post" action="/aqlam/post_approval">
             {!! csrf_field() !!}
-            <input type="hidden" name="post_confirm" value="{{$getPost->id}}">
+            <input type="hidden" name="post_approval" value="{{$getPost->id}}">
             <button class="positive ui button">قبول التدوية</button>
+        </form>
+        <form method="post" action="/aqlam/post_rejection">
+            {!! csrf_field() !!}
+            <input type="hidden" name="post_rejection" value="{{$getPost->id}}">
+            <button class="btn-warning ui button">رفض التدوية</button>
         </form>
         <a href="/aqlam/post_edit_form/{{$getPost->id}}" class="primary ui button" >تعديل التدوينة</a>
         <button class="negative ui button" id="delete_post">حذف التدوينة</button>

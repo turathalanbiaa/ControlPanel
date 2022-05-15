@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Aqlam;
 
+use App\Enums\ArticleStatus;
 use App\Model\Aqlam\Comment;
 use App\Model\Aqlam\Post;
 use Carbon\Carbon;
@@ -13,7 +14,8 @@ class CPanelController extends Controller
 {
     function cPanel ()
     {
-        $getPosts = Post::with('user','comments','rates')->orderBy('id','desc')->get();
+        $getPosts = Post::with('user','comments','rates')
+            ->orderBy('id','desc')->paginate(20);
         return view('aqlam.index',array('getPosts'=>$getPosts));
     }
     function view ($id)
@@ -49,12 +51,20 @@ class CPanelController extends Controller
      * @param Request $request
      * @return mixed
      */
-    function postConfirm (Request $request)
+    function postApproval (Request $request)
     {
-        $id = $request->input('post_confirm');
-        Post::where('id',$id)->update(['status'=>1, 'created_at'=>Carbon::now('Europe/London')]);
-        return redirect('/aqlam')->with('post_Confirm','تمت الموافقة على التدوينة');
+        $id = $request->input('post_approval');
+        Post::where('id',$id)->update(['status'=> ArticleStatus::ACCEPTED, 'created_at'=>Carbon::now('Europe/London')]);
+        return redirect('/aqlam')->with('post_approval','تمت الموافقة على التدوينة');
     }
+
+    function postRejection (Request $request)
+    {
+        $id = $request->input('post_rejection');
+        Post::where('id',$id)->update(['status'=> ArticleStatus::REJECTED, 'created_at'=>Carbon::now('Europe/London')]);
+        return redirect('/aqlam')->with('post_rejection','تمت الموافقة على التدوينة');
+    }
+
     function postEditForm ($id)
     {
         $getPost = Post::find($id);

@@ -83,7 +83,8 @@ Route::get('/aqlam/','Aqlam\\CPanelController@cPanel');
 Route::get('/aqlam/view/{id}','Aqlam\\CPanelController@view');
 Route::post('/aqlam/comment_destroy','Aqlam\\CPanelController@commentDestroy');
 Route::post('/aqlam/post_destroy','Aqlam\\CPanelController@postDestroy');
-Route::post('/aqlam/post_confirm','Aqlam\\CPanelController@postConfirm');
+Route::post('/aqlam/post_approval','Aqlam\\CPanelController@postApproval');
+Route::post('/aqlam/post_rejection','Aqlam\\CPanelController@postRejection');
 Route::get('/aqlam/post_edit_form/{id}','Aqlam\\CPanelController@postEditForm');
 Route::post('/aqlam/post_edit','Aqlam\\CPanelController@postEdit');
 /***********************************************************************************************************/

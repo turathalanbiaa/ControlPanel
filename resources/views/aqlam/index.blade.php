@@ -24,7 +24,7 @@
         <th>التقييم</th>
         <th>عدد التعليقات</th>
         <th>تاريخ التدوينة</th>
-        <th>الموافقة على التدوينة</th>
+        <th>الحالة</th>
     </tr>
     </thead>
     <tbody>
@@ -35,15 +35,18 @@
         <td><span class="ui rating" data-rating="{{round($getPost->rate/($getPost->rates->count()+0.1))}}" data-max-rating="5"></span></td>
         <td>{{$getPost->comments->count()}}</td>
         <td>{{$getPost->created_at}}</td>
-        @if($getPost->status == 0)
-            <td>بلا</td>
+        @if($getPost->status == \App\Enums\ArticleStatus::REVIEW)
+            <td>مراجعة</td>
+        @elseif($getPost->status == \App\Enums\ArticleStatus::ACCEPTED)
+            <td>قبول</td>
         @else
-        <td>نعم</td>
+            <td>رفض</td>
         @endif
     </tr>
     @endforeach
     </tbody>
 </table>
+    {{ $getPosts->links() }}
 <script>
     $(document).ready(function(){
         $('.ui.rating').rating('disable');
